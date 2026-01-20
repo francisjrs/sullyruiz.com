@@ -3,8 +3,9 @@ services:
     image: traefik:v2.11
     container_name: traefik
     command:
+      - --log.level=DEBUG
       - --api=true
-      - --api.dashboard=false
+      - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
@@ -49,11 +50,11 @@ services:
       - traefik.http.middlewares.sullyruiz-headers.headers.STSIncludeSubdomains=true
       - traefik.http.middlewares.sullyruiz-headers.headers.STSPreload=true
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
 
 volumes:
   traefik_data:
