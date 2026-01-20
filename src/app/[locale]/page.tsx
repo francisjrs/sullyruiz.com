@@ -14,6 +14,8 @@ import { ChatWizard } from "@/components/chat-wizard";
 
 type FlowType = "buy" | "sell" | null;
 
+import { About } from "@/components/about";
+
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [initialFlow, setInitialFlow] = useState<FlowType>(null);
@@ -33,6 +35,7 @@ export default function Home() {
       <Navbar onGetStarted={() => openChat()} />
       <Hero onBuy={() => openChat("buy")} onSell={() => openChat("sell")} />
       <TrustSection />
+      <About onContact={() => openChat()} />
       <HowItWorks />
       <Services onBuy={() => openChat("buy")} onSell={() => openChat("sell")} />
       <LeadMagnet />

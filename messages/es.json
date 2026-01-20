@@ -16,6 +16,13 @@
     "buyButton": "Quiero Comprar",
     "sellButton": "Quiero Vender"
   },
+  "about": {
+    "title": "Conoce a Sully Ruiz",
+    "subtitle": "Tu Experta en Bienes Raíces en Texas",
+    "bio1": "Con una profunda pasión por los bienes raíces en Texas y un compromiso con la excelencia, me especializo en ayudar a las familias a encontrar la casa de sus sueños y a los inversores a maximizar sus retornos en el área de Austin.",
+    "bio2": "Creo en construir relaciones duraderas basadas en confianza, transparencia y resultados. Ya sea que compres por primera vez o seas un vendedor experimentado, aporto el mismo nivel de dedicación y atención personalizada a cada transacción.",
+    "cta": "Trabaja Conmigo"
+  },
   "trust": {
     "title": "Confianza de Familias en Todo Texas",
     "stats": {

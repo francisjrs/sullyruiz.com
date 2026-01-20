@@ -55,42 +55,48 @@ export function Testimonials() {
               transition={{ duration: 0.8, delay: index * 0.15 }}
               className="relative"
             >
-              <div className="bg-[#f4f1ec] p-8 h-full relative group hover:bg-white hover:shadow-lg transition-all duration-500">
-                {/* Quote icon */}
-                <Quote
-                  className="w-10 h-10 text-[#BEB09E]/30 mb-6"
-                  strokeWidth={1}
-                />
+              <div
+                className="bg-[#f4f1ec] p-8 h-full relative group hover:bg-white hover:shadow-lg transition-all duration-500 bg-cover bg-center"
+                style={{ backgroundImage: "url('/images/testimonial-bg.png')" }}
+              >
+                <div className="absolute inset-0 bg-[#f4f1ec]/90 group-hover:bg-white/95 transition-all duration-500" />
+                <div className="relative z-10">
+                  {/* Quote icon */}
+                  <Quote
+                    className="w-10 h-10 text-[#BEB09E]/30 mb-6"
+                    strokeWidth={1}
+                  />
 
-                {/* Quote text */}
-                <blockquote className="body-lg text-lg mb-8 italic">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </blockquote>
+                  {/* Quote text */}
+                  <blockquote className="body-lg text-lg mb-8 italic">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </blockquote>
 
-                {/* Author info */}
-                <div className="flex items-center gap-4">
-                  {/* Placeholder avatar */}
-                  <div className="w-12 h-12 rounded-full bg-[#BEB09E]/20 flex items-center justify-center">
-                    <span className="font-sans text-sm text-[#BEB09E]">
-                      {testimonial.author
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")
-                        .slice(0, 2)}
-                    </span>
+                  {/* Author info */}
+                  <div className="flex items-center gap-4">
+                    {/* Placeholder avatar */}
+                    <div className="w-12 h-12 rounded-full bg-[#BEB09E]/20 flex items-center justify-center">
+                      <span className="font-sans text-sm text-[#BEB09E]">
+                        {testimonial.author
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .slice(0, 2)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-sans text-sm uppercase tracking-wider font-medium">
+                        {testimonial.author}
+                      </p>
+                      <p className="body-sm text-muted-foreground">
+                        {testimonial.location}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-sans text-sm uppercase tracking-wider font-medium">
-                      {testimonial.author}
-                    </p>
-                    <p className="body-sm text-muted-foreground">
-                      {testimonial.location}
-                    </p>
-                  </div>
+
+                  {/* Decorative border on hover */}
+                  <div className="absolute inset-0 border border-transparent group-hover:border-[#BEB09E] transition-all duration-500 pointer-events-none" />
                 </div>
-
-                {/* Decorative border on hover */}
-                <div className="absolute inset-0 border border-transparent group-hover:border-[#BEB09E] transition-all duration-500 pointer-events-none" />
               </div>
             </motion.div>
           ))}

@@ -75,6 +75,15 @@ export function LeadMagnet() {
                 </span>
               </div>
 
+              <div className="relative mb-8">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/buyers-guide-mockup.png"
+                  alt="Texas Home Buyer's Guide"
+                  className="w-48 h-auto mx-auto lg:mx-0 drop-shadow-xl"
+                />
+              </div>
+
               <h2 className="heading-lg text-2xl md:text-3xl mb-4">
                 {t("title")}
               </h2>

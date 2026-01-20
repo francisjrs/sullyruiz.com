@@ -18,8 +18,12 @@ export function TrustSection() {
   ];
 
   return (
-    <section ref={ref} className="bg-white section-padding">
-      <div className="container mx-auto px-6 md:px-12">
+    <section ref={ref} className="relative section-padding overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-10"
+        style={{ backgroundImage: "url('/images/austin-aerial.png')" }}
+      />
+      <div className="relative z-10 container mx-auto px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

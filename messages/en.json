@@ -16,6 +16,13 @@
     "buyButton": "I Want to Buy",
     "sellButton": "I Want to Sell"
   },
+  "about": {
+    "title": "Meet Sully Ruiz",
+    "subtitle": "Your Texas Real Estate Expert",
+    "bio1": "With a deep passion for Texas real estate and a commitment to excellence, I specialize in helping families find their dream homes and investors maximize their returns in the Austin area.",
+    "bio2": "I believe in building lasting relationships based on trust, transparency, and results. Whether you're a first-time buyer or seasoned seller, I bring the same level of dedication and personalized attention to every transaction.",
+    "cta": "Work With Me"
+  },
   "trust": {
     "title": "Trusted by Families Across Texas",
     "stats": {

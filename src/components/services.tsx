@@ -66,6 +66,15 @@ export function Services({ onBuy, onSell }: ServicesProps) {
               <div className="absolute bottom-0 right-0 w-px h-full bg-[#BEB09E]" />
             </div>
 
+            <div className="relative h-48 mb-6 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/services-buy.png"
+                alt="Couple receiving house keys"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
             <div className="relative">
               <h3 className="heading-md text-xl lg:text-2xl mb-4">{t("buy.title")}</h3>
               <p className="body-lg text-muted-foreground mb-8">
@@ -107,6 +116,15 @@ export function Services({ onBuy, onSell }: ServicesProps) {
             <div className="absolute bottom-0 right-0 w-16 h-16">
               <div className="absolute bottom-0 right-0 w-full h-px bg-[#BEB09E]" />
               <div className="absolute bottom-0 right-0 w-px h-full bg-[#BEB09E]" />
+            </div>
+
+            <div className="relative h-48 mb-6 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/services-sell.png"
+                alt="Luxury home sold"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
 
             <div className="relative">

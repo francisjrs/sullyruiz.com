@@ -14,8 +14,12 @@ export function Hero({ onBuy, onSell }: HeroProps) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#f4f1ec] via-white to-[#f4f1ec]" />
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/hero.png')" }}
+      />
+      <div className="absolute inset-0 bg-black/40" />
 
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-[#BEB09E]/10 rounded-full blur-3xl" />
@@ -39,7 +43,7 @@ export function Hero({ onBuy, onSell }: HeroProps) {
             </div>
 
             {/* Headline */}
-            <h1 className="heading-xl text-3xl md:text-5xl lg:text-6xl mb-6">
+            <h1 className="heading-xl text-3xl md:text-5xl lg:text-6xl mb-6 text-white">
               {t("headline")}
             </h1>
           </motion.div>
@@ -48,7 +52,7 @@ export function Hero({ onBuy, onSell }: HeroProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="body-lg text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12"
+            className="body-lg text-lg md:text-xl lg:text-2xl text-white/80 max-w-2xl mx-auto mb-12"
           >
             {t("subheadline")}
           </motion.p>
@@ -71,7 +75,7 @@ export function Hero({ onBuy, onSell }: HeroProps) {
             <Button
               onClick={onSell}
               variant="outline"
-              className="w-full sm:w-auto border-black text-black hover:bg-black hover:text-white font-sans text-sm uppercase tracking-widest px-10 py-6 rounded-none transition-all duration-300"
+              className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-black font-sans text-sm uppercase tracking-widest px-10 py-6 rounded-none transition-all duration-300"
             >
               {t("sellButton")}
             </Button>
@@ -88,9 +92,9 @@ export function Hero({ onBuy, onSell }: HeroProps) {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
-            className="w-6 h-10 border-2 border-[#BEB09E] rounded-full flex items-start justify-center p-2"
+            className="w-6 h-10 border-2 border-white/60 rounded-full flex items-start justify-center p-2"
           >
-            <motion.div className="w-1 h-2 bg-[#BEB09E] rounded-full" />
+            <motion.div className="w-1 h-2 bg-white/60 rounded-full" />
           </motion.div>
         </motion.div>
       </div>
