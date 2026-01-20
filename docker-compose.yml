@@ -1,15 +1,59 @@
 services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    command:
+      - --api=true
+      - --api.dashboard=false
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.mytlschallenge.acme.tlschallenge=true
+      - --certificatesresolvers.mytlschallenge.acme.email=${SSL_EMAIL}
+      - --certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - traefik_data:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
   app:
     image: ghcr.io/framos/sullyruiz.com:latest
     container_name: sullyruiz-app
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     env_file:
       - .env
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sullyruiz.rule=Host(`${DOMAIN_NAME}`) || Host(`www.${DOMAIN_NAME}`)
+      - traefik.http.routers.sullyruiz.tls=true
+      - traefik.http.routers.sullyruiz.entrypoints=web,websecure
+      - traefik.http.routers.sullyruiz.tls.certresolver=mytlschallenge
+      - traefik.http.services.sullyruiz.loadbalancer.server.port=3000
+      # Redirect www to non-www
+      - traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\.(.*)
+      - traefik.http.middlewares.www-redirect.redirectregex.replacement=https://$${1}
+      - traefik.http.middlewares.www-redirect.redirectregex.permanent=true
+      - traefik.http.routers.sullyruiz.middlewares=www-redirect
+      # Security headers
+      - traefik.http.middlewares.sullyruiz-headers.headers.SSLRedirect=true
+      - traefik.http.middlewares.sullyruiz-headers.headers.STSSeconds=315360000
+      - traefik.http.middlewares.sullyruiz-headers.headers.browserXSSFilter=true
+      - traefik.http.middlewares.sullyruiz-headers.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.sullyruiz-headers.headers.forceSTSHeader=true
+      - traefik.http.middlewares.sullyruiz-headers.headers.STSIncludeSubdomains=true
+      - traefik.http.middlewares.sullyruiz-headers.headers.STSPreload=true
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
+
+volumes:
+  traefik_data:
