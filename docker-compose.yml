@@ -23,7 +23,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   app:
-    image: ghcr.io/framos/sullyruiz.com:latest
+    image: ghcr.io/francisjrs/sullyruiz.com:latest
     container_name: sullyruiz-app
     restart: unless-stopped
     env_file:
