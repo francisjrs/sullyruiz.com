@@ -1,67 +1,63 @@
-# sullyruiz.com
+# CLAUDE.md
 
-Personal portfolio/landing page for Sully Ruiz built with Next.js 16.1.4.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
+
+Personal portfolio/landing page for Sully Ruiz (Texas real estate agent) built with Next.js 16.1.4.
+
+## Commands
+
+```bash
+npm run dev      # Start development server (localhost:3000)
+npm run build    # Build for production
+npm run lint     # Run ESLint
+npm start        # Start production server
+```
+
+**Docker:**
+```bash
+docker build -t sullyruiz .
+docker compose up -d
+```
 
 ## Tech Stack
 
 - **Framework:** Next.js 16.1.4 (App Router)
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS v4
 - **Internationalization:** next-intl (English/Spanish)
-- **Deployment:** Docker on Hostinger VPS with Nginx reverse proxy
+- **UI Components:** Radix UI primitives with shadcn/ui patterns
+- **Animations:** Framer Motion
+- **Deployment:** Docker on Hostinger VPS via GitHub Actions
 
-## Project Structure
+## Architecture
 
-```
-src/
-├── app/
-│   ├── [locale]/          # Locale-specific pages (en, es)
-│   └── api/
-│       ├── health/        # Health check endpoint for container
-│       └── lead/          # Lead capture endpoint
-├── components/            # React components
-├── i18n/                  # Internationalization config
-└── messages/              # Translation files (en.json, es.json)
-```
+### Routing & i18n
+- Uses next-intl with `[locale]` dynamic route segment
+- Locales: `en` (default), `es`
+- Locale prefix: `as-needed` (no `/en` prefix for default)
+- Translation files in `/messages/en.json` and `/messages/es.json`
+- Navigation helpers exported from `src/i18n/routing.ts`
 
-## Development
+### Page Structure
+Single-page app with section components rendered in `src/app/[locale]/page.tsx`:
+- Hero → TrustSection → About → HowItWorks → Services → LifestyleGallery → LeadMagnet → Testimonials → FAQ → Footer
 
-```bash
-npm install
-npm run dev
-```
+### Lead Capture Flow
+Two lead capture mechanisms, both POST to `/api/lead`:
+1. **ChatWizard** - Modal dialog with buy/sell flow questions, triggered from Hero/Services CTAs
+2. **LeadMagnet** - Email capture for buyer's guide download
 
-## Build & Production
-
-```bash
-npm run build
-npm start
-```
-
-## Docker
-
-```bash
-# Build image
-docker build -t sullyruiz .
-
-# Run container
-docker compose up -d
-```
+Leads are forwarded to n8n webhook (`N8N_WEBHOOK_URL` env var) for automation.
 
 ## Deployment
 
-Deployed via GitHub Actions to Hostinger VPS (31.220.22.215).
+Push to `main` triggers GitHub Actions:
+1. Build Docker image → push to ghcr.io
+2. SSH to VPS → pull and restart container
 
-- Push to `main` branch triggers deployment
-- Docker image built and pushed to ghcr.io
-- VPS pulls and runs latest image
-- Nginx reverse proxy handles SSL termination
+Health check: `curl https://sullyruiz.com/api/health`
 
 ## Environment Variables
 
-- `N8N_WEBHOOK_URL` - Webhook URL for lead capture (configured in /opt/sullyruiz/.env on VPS)
-
-## Health Check
-
-```bash
-curl https://sullyruiz.com/api/health
-```
+- `N8N_WEBHOOK_URL` - Webhook URL for lead capture (configured on VPS at /opt/sullyruiz/.env)
