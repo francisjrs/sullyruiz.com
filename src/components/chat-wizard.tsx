@@ -12,6 +12,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { getSessionData, clearSession } from "@/lib/session";
 
 type FlowType = "buy" | "sell" | null;
 type Step =
@@ -362,12 +363,16 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
     setIsSubmitting(true);
 
     try {
+      const sessionData = getSessionData();
+
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "chat_wizard",
           flow: data.flow,
+          session_id: sessionData.session_id,
+          cta_source: sessionData.cta_source,
           answers: {
             propertyType: data.propertyType,
             area: data.area,
@@ -386,6 +391,7 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
       });
 
       if (response.ok) {
+        clearSession();
         setStep("success");
       }
     } catch (error) {

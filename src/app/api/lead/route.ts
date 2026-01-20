@@ -1,7 +1,18 @@
 import { NextResponse } from "next/server";
 
+type CTASource =
+  | "navbar"
+  | "hero_buy"
+  | "hero_sell"
+  | "about"
+  | "services_buy"
+  | "services_sell"
+  | "lead_magnet";
+
 interface LeadMagnetPayload {
   type: "lead_magnet";
+  session_id: string;
+  cta_source: CTASource;
   contact: {
     firstName: string;
     email: string;
@@ -12,6 +23,8 @@ interface LeadMagnetPayload {
 interface ChatWizardPayload {
   type: "chat_wizard";
   flow: "buy" | "sell";
+  session_id: string;
+  cta_source: CTASource;
   answers: {
     propertyType?: string;
     area?: string;
@@ -63,14 +76,22 @@ export async function POST(request: Request) {
 
     // Forward to n8n webhook if configured
     const webhookUrl = process.env.N8N_WEBHOOK_URL;
+    const apiKey = process.env.N8N_API_KEY;
 
     if (webhookUrl) {
       try {
+        const headers: Record<string, string> = {
+          "Content-Type": "application/json",
+        };
+
+        // Add API key header if configured
+        if (apiKey) {
+          headers["X-API-Key"] = apiKey;
+        }
+
         const webhookResponse = await fetch(webhookUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers,
           body: JSON.stringify({
             ...body,
             timestamp: new Date().toISOString(),

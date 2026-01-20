@@ -58,13 +58,8 @@ export function HowItWorks() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: index * 0.15 }}
-              className="relative group"
+              className="group"
             >
-              {/* Connection line (visible on large screens) */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-[60%] w-[80%] h-px bg-[#BEB09E]/30" />
-              )}
-
               <div className="bg-white p-8 h-full border border-[#BEB09E]/20 hover:border-[#BEB09E] transition-colors duration-300">
                 {/* Step number */}
                 <div className="flex items-center justify-between mb-6">

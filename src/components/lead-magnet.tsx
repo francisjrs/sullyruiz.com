@@ -9,6 +9,7 @@ import { Check, BookOpen, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { getSessionId, setCTASource, clearSession } from "@/lib/session";
 
 export function LeadMagnet() {
   const t = useTranslations("leadMagnet");
@@ -33,17 +34,24 @@ export function LeadMagnet() {
     setIsSubmitting(true);
 
     try {
+      // Set CTA source for lead magnet
+      setCTASource("lead_magnet");
+      const sessionId = getSessionId();
+
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "lead_magnet",
+          session_id: sessionId,
+          cta_source: "lead_magnet",
           contact: { firstName, email },
           locale,
         }),
       });
 
       if (response.ok) {
+        clearSession();
         setIsSuccess(true);
         setFirstName("");
         setEmail("");
