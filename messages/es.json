@@ -1,0 +1,281 @@
+{
+  "metadata": {
+    "title": "Sully Ruiz | Experta en Bienes Raíces de Texas",
+    "description": "Encuentra tu casa soñada en Texas o vende tu propiedad al mejor precio. Servicios inmobiliarios expertos con atención personalizada."
+  },
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "getStarted": "Comenzar"
+  },
+  "hero": {
+    "headline": "Tu Viaje Inmobiliario en Texas Comienza Aquí",
+    "subheadline": "Ya sea comprando la casa de tus sueños o vendiendo por el máximo valor, estoy aquí para guiarte en cada paso del camino.",
+    "buyButton": "Quiero Comprar",
+    "sellButton": "Quiero Vender"
+  },
+  "trust": {
+    "title": "Confianza de Familias en Todo Texas",
+    "stats": {
+      "homesSold": "150+",
+      "homesSoldLabel": "Casas Vendidas",
+      "salesVolume": "$15M+",
+      "salesVolumeLabel": "En Ventas",
+      "clientSatisfaction": "95%",
+      "clientSatisfactionLabel": "Satisfacción del Cliente",
+      "googleRating": "5.0",
+      "googleRatingLabel": "Calificación en Google"
+    }
+  },
+  "howItWorks": {
+    "title": "Cómo Funciona",
+    "subtitle": "Un proceso simple y optimizado diseñado para hacer tu viaje inmobiliario sin estrés.",
+    "steps": {
+      "step1": {
+        "title": "Consulta Inicial",
+        "description": "Comenzamos con una conversación para entender tus metas, cronograma y preferencias."
+      },
+      "step2": {
+        "title": "Estrategia Personalizada",
+        "description": "Creo un plan personalizado adaptado a tus necesidades específicas y condiciones del mercado."
+      },
+      "step3": {
+        "title": "Guía Experta",
+        "description": "Desde las visitas hasta las negociaciones, manejo cada detalle con tus mejores intereses en mente."
+      },
+      "step4": {
+        "title": "Cierre Exitoso",
+        "description": "Celebra mientras cerramos el trato y te entrego las llaves de tu nuevo capítulo."
+      }
+    }
+  },
+  "services": {
+    "title": "¿Cómo Puedo Ayudarte?",
+    "subtitle": "Ya sea que estés comprando o vendiendo, ofrezco servicios completos para satisfacer tus necesidades.",
+    "buy": {
+      "title": "Comprar una Casa",
+      "description": "Encuentra tu propiedad perfecta con guía experta en cada paso del proceso de compra.",
+      "benefits": {
+        "benefit1": "Acceso a listados exclusivos",
+        "benefit2": "Experiencia en vecindarios",
+        "benefit3": "Negociación en tu nombre",
+        "benefit4": "Coordinación de cierre sin problemas"
+      },
+      "cta": "Comienza Tu Búsqueda"
+    },
+    "sell": {
+      "title": "Vender Tu Casa",
+      "description": "Maximiza el valor de tu casa con marketing estratégico y estrategias de precios expertas.",
+      "benefits": {
+        "benefit1": "Asesoría profesional de staging",
+        "benefit2": "Fotografía y marketing premium",
+        "benefit3": "Análisis estratégico de precios",
+        "benefit4": "Filtrado de compradores calificados"
+      },
+      "cta": "Obtén el Valor de Tu Casa"
+    }
+  },
+  "leadMagnet": {
+    "title": "Guía Gratuita del Comprador de Casa",
+    "subtitle": "Obtén tu guía completa para comprar una casa en Texas. Todo lo que necesitas saber, desde la pre-aprobación hasta el cierre.",
+    "features": {
+      "feature1": "Proceso de compra paso a paso",
+      "feature2": "Información del mercado de Texas",
+      "feature3": "Opciones de financiamiento explicadas",
+      "feature4": "Errores comunes a evitar"
+    },
+    "form": {
+      "firstName": "Nombre",
+      "email": "Correo Electrónico",
+      "submit": "Obtener Mi Guía Gratis",
+      "privacy": "Respetamos tu privacidad. Cancela la suscripción en cualquier momento."
+    },
+    "success": "¡Revisa tu correo para tu guía gratuita!"
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen Mis Clientes",
+    "subtitle": "Historias reales de personas reales que encontraron su hogar perfecto.",
+    "items": {
+      "testimonial1": {
+        "quote": "¡Sully me consiguió $22,000 en dinero de subvención que no sabía que existía! Usé el programa Texas First-Time Buyer y asistencia de la ciudad. Ahora soy dueña de mi casa soñada en Round Rock con solo 3% de enganche.",
+        "author": "Maria Gonzalez",
+        "location": "Round Rock, TX"
+      },
+      "testimonial2": {
+        "quote": "¡Listamos el lunes, tuvimos 3 ofertas el viernes, vendimos $15K sobre el precio de lista! La estrategia de marketing trajo compradores calificados inmediatamente.",
+        "author": "La Familia Rodriguez",
+        "location": "Austin, TX"
+      },
+      "testimonial3": {
+        "quote": "¡La casa estuvo 4 meses en el mercado con otro agente. Sully la reprecio y la vendió en 18 días!",
+        "author": "Jennifer Smith",
+        "location": "Georgetown, TX"
+      }
+    }
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "¿Tienes preguntas? Tengo respuestas.",
+    "items": {
+      "q1": {
+        "question": "¿Cómo sé si estoy listo para comprar una casa?",
+        "answer": "¿Listo para comprar? Considera estos factores: ingresos estables, buen puntaje crediticio (típicamente 620+), ahorros para el enganche (3-20%), y empleo estable. Ofrezco una consulta gratuita para ayudarte a evaluar tu preparación."
+      },
+      "q2": {
+        "question": "¿Qué áreas de Texas atiendes?",
+        "answer": "Principalmente sirvo Austin, Round Rock, Cedar Park, Georgetown, Pflugerville y Hutto. Si estás buscando en otra ciudad de Texas, contáctame - tengo una red de agentes de confianza en todo el estado."
+      },
+      "q3": {
+        "question": "¿Cuánto tiempo toma el proceso de compra de casa?",
+        "answer": "El plazo típico es de 30-45 días desde la oferta aceptada hasta el cierre. Sin embargo, encontrar la casa correcta puede tomar más tiempo dependiendo del mercado. Te ayudo a agilizar el proceso mientras aseguro que no te apresures en una decisión incorrecta."
+      },
+      "q4": {
+        "question": "¿Cuáles son tus honorarios?",
+        "answer": "Para compradores, mis servicios son típicamente gratuitos ya que el vendedor paga la comisión. Para vendedores, discutimos la estructura de comisión durante nuestra consulta basado en tu propiedad y necesidades."
+      },
+      "q5": {
+        "question": "¿Hablas español?",
+        "answer": "¡Sí! Soy completamente bilingüe. Hablo inglés y español con fluidez y estoy feliz de trabajar en el idioma que prefieras."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Haciendo que Texas se sienta como hogar, una familia a la vez.",
+    "contact": {
+      "title": "Contacto",
+      "email": "realtor@sullyruiz.com",
+      "phone": "(512) 412-2352"
+    },
+    "social": {
+      "title": "Sígueme"
+    },
+    "legal": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio"
+    },
+    "compliance": {
+      "brokerage": "Keller Williams Austin NW",
+      "address": "9606 N Mopac Expy, Ste 950, Austin, TX 78759",
+      "license": "Licencia #0742907",
+      "iabs": "Información de TREC Sobre Servicios de Corretaje",
+      "consumerProtection": "Aviso de Protección al Consumidor de TREC",
+      "equalHousing": "Igualdad de Oportunidades en Vivienda",
+      "disclaimer": "Cada oficina de Keller Williams es de propiedad y operación independiente."
+    },
+    "copyright": "© {year} Sully Ruiz Bienes Raíces. Todos los derechos reservados."
+  },
+  "chat": {
+    "welcome": "¡Hola! Estoy aquí para ayudarte con tus necesidades inmobiliarias. ¿Estás buscando comprar o vender?",
+    "buyOrSell": {
+      "question": "¿Qué te gustaría hacer?",
+      "buy": "Comprar una Casa",
+      "sell": "Vender Mi Casa"
+    },
+    "buy": {
+      "propertyType": {
+        "question": "¿Qué tipo de propiedad estás buscando?",
+        "options": {
+          "singleFamily": "Casa Unifamiliar",
+          "condo": "Condominio / Townhouse",
+          "multiFamily": "Multifamiliar",
+          "land": "Terreno / Lote"
+        }
+      },
+      "area": {
+        "question": "¿Qué área de Texas te interesa?",
+        "options": {
+          "austin": "Área de Austin",
+          "houston": "Área de Houston",
+          "sanAntonio": "Área de San Antonio",
+          "dallas": "Área de Dallas-Fort Worth",
+          "other": "Otra"
+        },
+        "placeholder": "Ingresa ciudad o área"
+      },
+      "budget": {
+        "question": "¿Cuál es tu rango de presupuesto?",
+        "options": {
+          "under300": "Menos de $300,000",
+          "300to500": "$300,000 - $500,000",
+          "500to750": "$500,000 - $750,000",
+          "750to1m": "$750,000 - $1,000,000",
+          "over1m": "Más de $1,000,000"
+        }
+      },
+      "timeline": {
+        "question": "¿Cuándo estás buscando comprar?",
+        "options": {
+          "asap": "Lo antes posible",
+          "1to3months": "1-3 meses",
+          "3to6months": "3-6 meses",
+          "6plus": "6+ meses",
+          "justLooking": "Solo mirando"
+        }
+      }
+    },
+    "sell": {
+      "propertyType": {
+        "question": "¿Qué tipo de propiedad estás vendiendo?",
+        "options": {
+          "singleFamily": "Casa Unifamiliar",
+          "condo": "Condominio / Townhouse",
+          "multiFamily": "Multifamiliar",
+          "land": "Terreno / Lote"
+        }
+      },
+      "address": {
+        "question": "¿En qué área está ubicada tu propiedad?",
+        "placeholder": "Ingresa ciudad o vecindario"
+      },
+      "reason": {
+        "question": "¿Cuál es tu razón principal para vender?",
+        "options": {
+          "relocating": "Mudanza",
+          "upgrading": "Cambio a casa más grande",
+          "downsizing": "Reducción de tamaño",
+          "investment": "Propiedad de inversión",
+          "other": "Otra"
+        }
+      },
+      "timeline": {
+        "question": "¿Para cuándo necesitas vender?",
+        "options": {
+          "asap": "Lo antes posible",
+          "1to3months": "1-3 meses",
+          "3to6months": "3-6 meses",
+          "flexible": "Plazo flexible"
+        }
+      }
+    },
+    "contact": {
+      "intro": "¡Excelente! Déjame obtener tu información de contacto para poder comunicarme con ayuda personalizada.",
+      "name": {
+        "question": "¿Cuál es tu nombre?",
+        "placeholder": "Tu nombre completo"
+      },
+      "phone": {
+        "question": "¿Cuál es el mejor número de teléfono para contactarte?",
+        "placeholder": "(555) 123-4567"
+      },
+      "email": {
+        "question": "¿Y tu correo electrónico?",
+        "placeholder": "tu@correo.com"
+      }
+    },
+    "success": {
+      "title": "¡Gracias!",
+      "message": "He recibido tu información y me comunicaré contigo dentro de 24 horas. ¡Espero ayudarte con tu viaje inmobiliario!",
+      "close": "Cerrar"
+    },
+    "typing": "Escribiendo...",
+    "send": "Enviar",
+    "back": "Atrás",
+    "continue": "Continuar"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español"
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "metadata": {
+    "title": "Sully Ruiz | Texas Real Estate Expert",
+    "description": "Find your dream home in Texas or sell your property for top dollar. Expert real estate services with personalized attention."
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "headline": "Your Texas Real Estate Journey Starts Here",
+    "subheadline": "Whether buying your dream home or selling for maximum value, I'm here to guide you every step of the way.",
+    "buyButton": "I Want to Buy",
+    "sellButton": "I Want to Sell"
+  },
+  "trust": {
+    "title": "Trusted by Families Across Texas",
+    "stats": {
+      "homesSold": "150+",
+      "homesSoldLabel": "Homes Sold",
+      "salesVolume": "$15M+",
+      "salesVolumeLabel": "In Sales",
+      "clientSatisfaction": "95%",
+      "clientSatisfactionLabel": "Client Satisfaction",
+      "googleRating": "5.0",
+      "googleRatingLabel": "Google Rating"
+    }
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "A simple, streamlined process designed to make your real estate journey stress-free.",
+    "steps": {
+      "step1": {
+        "title": "Initial Consultation",
+        "description": "We start with a conversation to understand your goals, timeline, and preferences."
+      },
+      "step2": {
+        "title": "Personalized Strategy",
+        "description": "I create a customized plan tailored to your specific needs and market conditions."
+      },
+      "step3": {
+        "title": "Expert Guidance",
+        "description": "From showings to negotiations, I handle every detail with your best interests in mind."
+      },
+      "step4": {
+        "title": "Successful Closing",
+        "description": "Celebrate as we close the deal and hand you the keys to your new chapter."
+      }
+    }
+  },
+  "services": {
+    "title": "How Can I Help You?",
+    "subtitle": "Whether you're buying or selling, I provide comprehensive services to meet your needs.",
+    "buy": {
+      "title": "Buying a Home",
+      "description": "Find your perfect property with expert guidance through every step of the buying process.",
+      "benefits": {
+        "benefit1": "Access to exclusive listings",
+        "benefit2": "Neighborhood expertise",
+        "benefit3": "Negotiation on your behalf",
+        "benefit4": "Seamless closing coordination"
+      },
+      "cta": "Start Your Search"
+    },
+    "sell": {
+      "title": "Selling Your Home",
+      "description": "Maximize your home's value with strategic marketing and expert pricing strategies.",
+      "benefits": {
+        "benefit1": "Professional home staging advice",
+        "benefit2": "Premium photography & marketing",
+        "benefit3": "Strategic pricing analysis",
+        "benefit4": "Qualified buyer screening"
+      },
+      "cta": "Get Your Home's Value"
+    }
+  },
+  "leadMagnet": {
+    "title": "Free Home Buyer's Guide",
+    "subtitle": "Get your comprehensive guide to buying a home in Texas. Everything you need to know, from pre-approval to closing.",
+    "features": {
+      "feature1": "Step-by-step buying process",
+      "feature2": "Texas market insights",
+      "feature3": "Financing options explained",
+      "feature4": "Common mistakes to avoid"
+    },
+    "form": {
+      "firstName": "First Name",
+      "email": "Email Address",
+      "submit": "Get My Free Guide",
+      "privacy": "We respect your privacy. Unsubscribe at any time."
+    },
+    "success": "Check your email for your free guide!"
+  },
+  "testimonials": {
+    "title": "What My Clients Say",
+    "subtitle": "Real stories from real people who found their perfect home.",
+    "items": {
+      "testimonial1": {
+        "quote": "Sully got me $22,000 in grant money I didn't know existed! Used Texas First-Time Buyer program and city assistance. Now I own my dream home in Round Rock with only 3% down.",
+        "author": "Maria Gonzalez",
+        "location": "Round Rock, TX"
+      },
+      "testimonial2": {
+        "quote": "Listed on Monday, had 3 offers by Friday, sold for $15K over asking! Marketing strategy brought qualified buyers immediately.",
+        "author": "The Rodriguez Family",
+        "location": "Austin, TX"
+      },
+      "testimonial3": {
+        "quote": "House sat on market for 4 months with another agent. Sully repriced it and sold in 18 days!",
+        "author": "Jennifer Smith",
+        "location": "Georgetown, TX"
+      }
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Got questions? I've got answers.",
+    "items": {
+      "q1": {
+        "question": "How do I know if I'm ready to buy a home?",
+        "answer": "Ready to buy? Consider these factors: stable income, good credit score (typically 620+), savings for down payment (3-20%), and steady employment. I offer a free consultation to help you assess your readiness."
+      },
+      "q2": {
+        "question": "What areas in Texas do you serve?",
+        "answer": "I primarily serve Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, and Hutto. If you're looking in another Texas city, reach out - I have a network of trusted agents statewide."
+      },
+      "q3": {
+        "question": "How long does the home buying process take?",
+        "answer": "The typical timeline is 30-45 days from accepted offer to closing. However, finding the right home can take longer depending on the market. I help streamline the process while ensuring you don't rush into the wrong decision."
+      },
+      "q4": {
+        "question": "What are your fees?",
+        "answer": "For buyers, my services are typically free as the seller pays the commission. For sellers, we discuss commission structure during our consultation based on your property and needs."
+      },
+      "q5": {
+        "question": "Do you speak Spanish?",
+        "answer": "Yes! Soy completamente bilingue. I'm fluent in both English and Spanish and happy to work in whichever language you prefer."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Making Texas feel like home, one family at a time.",
+    "contact": {
+      "title": "Contact",
+      "email": "realtor@sullyruiz.com",
+      "phone": "(512) 412-2352"
+    },
+    "social": {
+      "title": "Follow Me"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "compliance": {
+      "brokerage": "Keller Williams Austin NW",
+      "address": "9606 N Mopac Expy, Ste 950, Austin, TX 78759",
+      "license": "License #0742907",
+      "iabs": "TREC Information About Brokerage Services",
+      "consumerProtection": "TREC Consumer Protection Notice",
+      "equalHousing": "Equal Housing Opportunity",
+      "disclaimer": "Each Keller Williams office is independently owned and operated."
+    },
+    "copyright": "© {year} Sully Ruiz Real Estate. All rights reserved."
+  },
+  "chat": {
+    "welcome": "Hi there! I'm here to help you with your real estate needs. Are you looking to buy or sell?",
+    "buyOrSell": {
+      "question": "What would you like to do?",
+      "buy": "Buy a Home",
+      "sell": "Sell My Home"
+    },
+    "buy": {
+      "propertyType": {
+        "question": "What type of property are you looking for?",
+        "options": {
+          "singleFamily": "Single Family Home",
+          "condo": "Condo / Townhouse",
+          "multiFamily": "Multi-Family",
+          "land": "Land / Lot"
+        }
+      },
+      "area": {
+        "question": "Which area of Texas are you interested in?",
+        "options": {
+          "austin": "Austin Area",
+          "houston": "Houston Area",
+          "sanAntonio": "San Antonio Area",
+          "dallas": "Dallas-Fort Worth Area",
+          "other": "Other"
+        },
+        "placeholder": "Enter city or area"
+      },
+      "budget": {
+        "question": "What's your budget range?",
+        "options": {
+          "under300": "Under $300,000",
+          "300to500": "$300,000 - $500,000",
+          "500to750": "$500,000 - $750,000",
+          "750to1m": "$750,000 - $1,000,000",
+          "over1m": "Over $1,000,000"
+        }
+      },
+      "timeline": {
+        "question": "When are you looking to buy?",
+        "options": {
+          "asap": "As soon as possible",
+          "1to3months": "1-3 months",
+          "3to6months": "3-6 months",
+          "6plus": "6+ months",
+          "justLooking": "Just looking"
+        }
+      }
+    },
+    "sell": {
+      "propertyType": {
+        "question": "What type of property are you selling?",
+        "options": {
+          "singleFamily": "Single Family Home",
+          "condo": "Condo / Townhouse",
+          "multiFamily": "Multi-Family",
+          "land": "Land / Lot"
+        }
+      },
+      "address": {
+        "question": "What area is your property located in?",
+        "placeholder": "Enter city or neighborhood"
+      },
+      "reason": {
+        "question": "What's your primary reason for selling?",
+        "options": {
+          "relocating": "Relocating",
+          "upgrading": "Upgrading to larger home",
+          "downsizing": "Downsizing",
+          "investment": "Investment property",
+          "other": "Other"
+        }
+      },
+      "timeline": {
+        "question": "When do you need to sell by?",
+        "options": {
+          "asap": "As soon as possible",
+          "1to3months": "1-3 months",
+          "3to6months": "3-6 months",
+          "flexible": "Flexible timeline"
+        }
+      }
+    },
+    "contact": {
+      "intro": "Great! Let me get your contact information so I can reach out with personalized help.",
+      "name": {
+        "question": "What's your name?",
+        "placeholder": "Your full name"
+      },
+      "phone": {
+        "question": "What's the best phone number to reach you?",
+        "placeholder": "(555) 123-4567"
+      },
+      "email": {
+        "question": "And your email address?",
+        "placeholder": "your@email.com"
+      }
+    },
+    "success": {
+      "title": "Thank you!",
+      "message": "I've received your information and will be in touch within 24 hours. Looking forward to helping you with your real estate journey!",
+      "close": "Close"
+    },
+    "typing": "Typing...",
+    "send": "Send",
+    "back": "Back",
+    "continue": "Continue"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español"
+  }
+}
