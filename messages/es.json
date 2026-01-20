@@ -281,6 +281,20 @@
     "back": "Atrás",
     "continue": "Continuar"
   },
+  "gallery": {
+    "title": "Experimenta la Vida en Texas",
+    "subtitle": "Descubre el estilo de vida que te espera en Austin y Texas Hill Country.",
+    "austin": {
+      "lifestyle": "Estilo de Vida Austin",
+      "southCongress": "South Congress"
+    },
+    "property": {
+      "livingRoom": "Vida de Lujo",
+      "kitchen": "Cocina Gourmet",
+      "bedroom": "Suite Principal",
+      "outdoor": "Vida al Aire Libre"
+    }
+  },
   "language": {
     "en": "English",
     "es": "Español"

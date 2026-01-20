@@ -7,6 +7,7 @@ import { TrustSection } from "@/components/trust-section";
 import { HowItWorks } from "@/components/how-it-works";
 import { Services } from "@/components/services";
 import { LeadMagnet } from "@/components/lead-magnet";
+import { LifestyleGallery } from "@/components/lifestyle-gallery";
 import { Testimonials } from "@/components/testimonials";
 import { FAQ } from "@/components/faq";
 import { Footer } from "@/components/footer";
@@ -38,6 +39,7 @@ export default function Home() {
       <About onContact={() => openChat()} />
       <HowItWorks />
       <Services onBuy={() => openChat("buy")} onSell={() => openChat("sell")} />
+      <LifestyleGallery />
       <LeadMagnet />
       <Testimonials />
       <FAQ />

@@ -281,6 +281,20 @@
     "back": "Back",
     "continue": "Continue"
   },
+  "gallery": {
+    "title": "Experience Texas Living",
+    "subtitle": "Discover the lifestyle that awaits you in Austin and the Texas Hill Country.",
+    "austin": {
+      "lifestyle": "Austin Lifestyle",
+      "southCongress": "South Congress"
+    },
+    "property": {
+      "livingRoom": "Luxury Living",
+      "kitchen": "Gourmet Kitchen",
+      "bedroom": "Master Suite",
+      "outdoor": "Outdoor Living"
+    }
+  },
   "language": {
     "en": "English",
     "es": "Español"
