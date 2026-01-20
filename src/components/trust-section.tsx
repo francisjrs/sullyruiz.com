@@ -21,7 +21,7 @@ export function TrustSection() {
     <section ref={ref} className="relative section-padding overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center opacity-10"
-        style={{ backgroundImage: "url('/images/austin-aerial.png')" }}
+        style={{ backgroundImage: "url('/images/austin-aerial.webp')" }}
       />
       <div className="relative z-10 container mx-auto px-6 md:px-12">
         <motion.div

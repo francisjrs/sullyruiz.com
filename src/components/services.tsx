@@ -69,7 +69,7 @@ export function Services({ onBuy, onSell }: ServicesProps) {
             <div className="relative h-48 mb-6 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/services-buy.png"
+                src="/images/services-buy.webp"
                 alt="Couple receiving house keys"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -121,7 +121,7 @@ export function Services({ onBuy, onSell }: ServicesProps) {
             <div className="relative h-48 mb-6 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/services-sell.png"
+                src="/images/services-sell.webp"
                 alt="Luxury home sold"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />

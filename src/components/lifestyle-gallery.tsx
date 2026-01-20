@@ -11,15 +11,15 @@ interface GalleryImage {
 }
 
 const austinImages: GalleryImage[] = [
-  { src: "/images/Austin_lifestyle.png", titleKey: "austin.lifestyle" },
-  { src: "/images/ South_Congress.png", titleKey: "austin.southCongress" },
+  { src: "/images/Austin_lifestyle.webp", titleKey: "austin.lifestyle" },
+  { src: "/images/South_Congress.webp", titleKey: "austin.southCongress" },
 ];
 
 const propertyImages: GalleryImage[] = [
-  { src: "/images/Luxury_living_Room.png", titleKey: "property.livingRoom" },
-  { src: "/images/Gourmet_Kitchen.png", titleKey: "property.kitchen" },
-  { src: "/images/Master_Suite.png", titleKey: "property.bedroom" },
-  { src: "/images/outdoor-living.png", titleKey: "property.outdoor" },
+  { src: "/images/Luxury_living_Room.webp", titleKey: "property.livingRoom" },
+  { src: "/images/Gourmet_Kitchen.webp", titleKey: "property.kitchen" },
+  { src: "/images/Master_Suite.webp", titleKey: "property.bedroom" },
+  { src: "/images/outdoor-living.webp", titleKey: "property.outdoor" },
 ];
 
 function GalleryCard({ image, t, delay }: { image: GalleryImage; t: (key: string) => string; delay: number }) {

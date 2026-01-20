@@ -57,7 +57,7 @@ export function Testimonials() {
             >
               <div
                 className="bg-[#f4f1ec] p-8 h-full relative group hover:bg-white hover:shadow-lg transition-all duration-500 bg-cover bg-center"
-                style={{ backgroundImage: "url('/images/testimonial-bg.png')" }}
+                style={{ backgroundImage: "url('/images/testimonial-bg.webp')" }}
               >
                 <div className="absolute inset-0 bg-[#f4f1ec]/90 group-hover:bg-white/95 transition-all duration-500" />
                 <div className="relative z-10">

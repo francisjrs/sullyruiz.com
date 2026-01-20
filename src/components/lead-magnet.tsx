@@ -78,7 +78,7 @@ export function LeadMagnet() {
               <div className="relative mb-8">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/buyers-guide-mockup.png"
+                  src="/images/buyers-guide-mockup.webp"
                   alt="Texas Home Buyer's Guide"
                   className="w-48 h-auto mx-auto lg:mx-0 drop-shadow-xl"
                 />

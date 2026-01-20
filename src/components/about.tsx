@@ -34,7 +34,7 @@ export function About({ onContact }: AboutProps) {
                             <div className="relative h-full w-full overflow-hidden bg-white shadow-xl">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                    src="/images/sully-ruiz.png"
+                                    src="/images/sully-ruiz.webp"
                                     alt="Sully Ruiz"
                                     className="w-full h-full object-cover"
                                 />
