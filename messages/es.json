@@ -86,13 +86,30 @@
     }
   },
   "leadMagnet": {
-    "title": "Guía Gratuita del Comprador de Casa",
-    "subtitle": "Obtén tu guía completa para comprar una casa en Texas. Todo lo que necesitas saber, desde la pre-aprobación hasta el cierre.",
-    "features": {
-      "feature1": "Proceso de compra paso a paso",
-      "feature2": "Información del mercado de Texas",
-      "feature3": "Opciones de financiamiento explicadas",
-      "feature4": "Errores comunes a evitar"
+    "freeDownload": "Descarga Gratis",
+    "toggle": {
+      "buyer": "Guía del Comprador",
+      "seller": "Guía del Vendedor"
+    },
+    "buyer": {
+      "title": "Guía Gratuita del Comprador de Casa",
+      "subtitle": "Obtén tu guía completa para comprar una casa en Texas. Todo lo que necesitas saber, desde la pre-aprobación hasta el cierre.",
+      "features": {
+        "feature1": "Proceso de compra paso a paso",
+        "feature2": "Información del mercado de Texas",
+        "feature3": "Opciones de financiamiento explicadas",
+        "feature4": "Errores comunes a evitar"
+      }
+    },
+    "seller": {
+      "title": "Guía Gratuita del Vendedor de Casa",
+      "subtitle": "Maximiza el valor de tu casa con nuestra guía completa de venta. Consejos estratégicos desde el precio hasta el cierre.",
+      "features": {
+        "feature1": "Estrategias de precios competitivos",
+        "feature2": "Lista de preparación del hogar",
+        "feature3": "Mejores prácticas de marketing",
+        "feature4": "Consejos de negociación de un experto"
+      }
     },
     "form": {
       "firstName": "Nombre",

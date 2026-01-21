@@ -19,6 +19,7 @@ export function LeadMagnet() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { toast } = useToast();
 
+  const [guideType, setGuideType] = useState<"buyer" | "seller">("buyer");
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,10 +73,10 @@ export function LeadMagnet() {
   };
 
   const features = [
-    t("features.feature1"),
-    t("features.feature2"),
-    t("features.feature3"),
-    t("features.feature4"),
+    t(`${guideType}.features.feature1`),
+    t(`${guideType}.features.feature2`),
+    t(`${guideType}.features.feature3`),
+    t(`${guideType}.features.feature4`),
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -99,6 +100,7 @@ export function LeadMagnet() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "lead_magnet",
+          guideType,
           session_id: sessionId,
           cta_source: "lead_magnet",
           contact: { firstName, email },
@@ -159,30 +161,56 @@ export function LeadMagnet() {
                   <BookOpen className="w-6 h-6 text-[#BEB09E]" />
                 </div>
                 <span className="font-sans text-xs uppercase tracking-widest text-[#BEB09E]">
-                  Free Download
+                  {t("freeDownload")}
                 </span>
+              </div>
+
+              {/* Guide Type Toggle */}
+              <div className="flex border border-[#BEB09E]/30 mb-6 max-w-xs">
+                <button
+                  type="button"
+                  onClick={() => setGuideType("buyer")}
+                  className={`flex-1 py-3 px-4 font-sans text-xs uppercase tracking-wider transition-all duration-300 ${
+                    guideType === "buyer"
+                      ? "bg-[#BEB09E] text-white"
+                      : "bg-transparent text-[#BEB09E] hover:bg-[#BEB09E]/10"
+                  }`}
+                >
+                  {t("toggle.buyer")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setGuideType("seller")}
+                  className={`flex-1 py-3 px-4 font-sans text-xs uppercase tracking-wider transition-all duration-300 ${
+                    guideType === "seller"
+                      ? "bg-[#BEB09E] text-white"
+                      : "bg-transparent text-[#BEB09E] hover:bg-[#BEB09E]/10"
+                  }`}
+                >
+                  {t("toggle.seller")}
+                </button>
               </div>
 
               <div className="relative mb-8">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/buyers-guide-mockup.webp"
-                  alt="Texas Home Buyer's Guide"
+                  src={guideType === "buyer" ? "/images/buyers-guide-mockup.webp" : "/images/sellers-guide-mockup.webp"}
+                  alt={guideType === "buyer" ? "Texas Home Buyer's Guide" : "Texas Home Seller's Guide"}
                   className="w-48 h-auto mx-auto lg:mx-0 drop-shadow-xl"
                 />
               </div>
 
               <h2 className="heading-lg text-2xl md:text-3xl mb-4">
-                {t("title")}
+                {t(`${guideType}.title`)}
               </h2>
               <p className="body-lg text-muted-foreground mb-8">
-                {t("subtitle")}
+                {t(`${guideType}.subtitle`)}
               </p>
 
               <ul className="space-y-4">
                 {features.map((feature, index) => (
                   <motion.li
-                    key={index}
+                    key={`${guideType}-${index}`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}

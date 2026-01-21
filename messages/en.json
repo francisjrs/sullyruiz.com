@@ -86,13 +86,30 @@
     }
   },
   "leadMagnet": {
-    "title": "Free Home Buyer's Guide",
-    "subtitle": "Get your comprehensive guide to buying a home in Texas. Everything you need to know, from pre-approval to closing.",
-    "features": {
-      "feature1": "Step-by-step buying process",
-      "feature2": "Texas market insights",
-      "feature3": "Financing options explained",
-      "feature4": "Common mistakes to avoid"
+    "freeDownload": "Free Download",
+    "toggle": {
+      "buyer": "Buyer's Guide",
+      "seller": "Seller's Guide"
+    },
+    "buyer": {
+      "title": "Free Home Buyer's Guide",
+      "subtitle": "Get your comprehensive guide to buying a home in Texas. Everything you need to know, from pre-approval to closing.",
+      "features": {
+        "feature1": "Step-by-step buying process",
+        "feature2": "Texas market insights",
+        "feature3": "Financing options explained",
+        "feature4": "Common mistakes to avoid"
+      }
+    },
+    "seller": {
+      "title": "Free Home Seller's Guide",
+      "subtitle": "Maximize your home's value with our comprehensive selling guide. Strategic tips from pricing to closing.",
+      "features": {
+        "feature1": "Strategic pricing strategies",
+        "feature2": "Home preparation checklist",
+        "feature3": "Marketing best practices",
+        "feature4": "Negotiation tips from a pro"
+      }
     },
     "form": {
       "firstName": "First Name",

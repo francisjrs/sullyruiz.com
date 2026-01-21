@@ -12,6 +12,7 @@ type CTASource =
 
 interface LeadMagnetPayload {
   type: "lead_magnet";
+  guideType: "buyer" | "seller";
   session_id: string;
   cta_source: CTASource;
   contact: {

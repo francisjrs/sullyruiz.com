@@ -1,0 +1,4 @@
+portrait_id,filename,type,description,tags,uploaded_at,active
+p001,sully_headshot_1.jpg,human,Professional headshot in navy suit,"formal,headshot",2026-01-21,true
+p002,sully_casual_1.jpg,human,Casual outdoor showing homes,"casual,outdoor",2026-01-21,true
+p003,sully_professional_1.jpg,human,Business casual office setting,"formal,office",2026-01-21,true
