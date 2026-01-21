@@ -22,8 +22,9 @@ export function Navbar({ onGetStarted }: { onGetStarted: () => void }) {
   }, []);
 
   const navLinks = [
+    { href: "#about", label: t("about") },
+    { href: "#how-it-works", label: t("howItWorks") },
     { href: "#services", label: t("services") },
-    { href: "#how-it-works", label: t("about") },
     { href: "#contact", label: t("contact") },
   ];
 
@@ -31,8 +32,8 @@ export function Navbar({ onGetStarted }: { onGetStarted: () => void }) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm py-4"
-          : "bg-transparent py-6"
+          ? "bg-white/95 backdrop-blur-md shadow-sm py-4 text-black"
+          : "bg-transparent py-6 text-white"
       }`}
     >
       <div className="container mx-auto px-6 md:px-12">
@@ -87,7 +88,7 @@ export function Navbar({ onGetStarted }: { onGetStarted: () => void }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden fixed inset-0 top-0 bg-white z-40"
+            className="lg:hidden fixed inset-0 top-0 bg-white z-40 text-black"
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, index) => (

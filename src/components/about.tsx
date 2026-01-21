@@ -16,7 +16,7 @@ export function About({ onContact }: AboutProps) {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section ref={ref} className="section-padding bg-[#f4f1ec] overflow-hidden">
+        <section id="about" ref={ref} className="section-padding bg-[#f4f1ec] overflow-hidden">
             <div className="container mx-auto px-6 md:px-12">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     {/* Image Column */}

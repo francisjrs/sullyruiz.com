@@ -75,7 +75,7 @@ export function Hero({ onBuy, onSell }: HeroProps) {
             <Button
               onClick={onSell}
               variant="outline"
-              className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-black font-sans text-sm uppercase tracking-widest px-10 py-6 rounded-none transition-all duration-300"
+              className="w-full sm:w-auto bg-transparent border-white text-white hover:bg-white hover:text-black font-sans text-sm uppercase tracking-widest px-10 py-6 rounded-none transition-all duration-300"
             >
               {t("sellButton")}
             </Button>
