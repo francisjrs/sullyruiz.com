@@ -4,7 +4,6 @@ import { styles } from '../styles';
 
 interface FooterProps {
   pageNumber: number;
-  totalPages: number;
   agentName?: string;
   website?: string;
 }

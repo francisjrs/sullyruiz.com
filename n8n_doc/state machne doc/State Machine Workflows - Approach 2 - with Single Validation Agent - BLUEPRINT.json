@@ -1,0 +1,2081 @@
+{
+  "name": "State Machine Workflows - Approach 2 - with Single Validation Agent - BLUEPRINT",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "@[youtube](QYLvnWAzcYY)",
+        "height": 384,
+        "width": 656,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3952,
+        -256
+      ],
+      "id": "669cdd40-a784-45fa-be36-0b1e2e2d7cca",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "[![The AI Automators](https://www.theaiautomators.com/wp-content/uploads/2025/03/gray-logo.png)](https://www.theaiautomators.com/)",
+        "height": 380,
+        "width": 580,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4576,
+        -256
+      ],
+      "id": "f39e96a4-724c-4f70-b172-53602bdb425c",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "## <- Connect this node\nWhen you want to start sending emails",
+        "height": 256,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -384,
+        448
+      ],
+      "typeVersion": 1,
+      "id": "f56fa41d-de7f-4dab-8262-ca68e010e23b",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## <- Connect this node\nWhen you want to start sending emails",
+        "height": 256,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1008,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "e6de94da-5130-4b21-b1cb-1885c66f9f6a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "QT4AlFp3ZcHFxVUM",
+          "mode": "list",
+          "cachedResultName": "Returns_agent_configuration",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/QT4AlFp3ZcHFxVUM"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "=1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1440,
+        -352
+      ],
+      "id": "3c78ed40-751b-408a-b862-da49979634c6",
+      "name": "Get first step"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('row_details').item.json.row.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "retryCount": "={{ $('Get_row').item.json.retryCount + 1}}",
+            "status": "open",
+            "return_reason": "={{null}}",
+            "currentStepIndex": "1",
+            "resolution_type": "={{null}}",
+            "return_method": "={{null}}",
+            "escalation_message": "={{null}}",
+            "order_number": "={{null}}",
+            "email_confirmation": "={{null}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "currentStepIndex",
+              "displayName": "currentStepIndex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "retryCount",
+              "displayName": "retryCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "order_number",
+              "displayName": "order_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "return_reason",
+              "displayName": "return_reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "resolution_type",
+              "displayName": "resolution_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email_confirmation",
+              "displayName": "email_confirmation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "return_method",
+              "displayName": "return_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "escalation_message",
+              "displayName": "escalation_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "item_condition",
+              "displayName": "item_condition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1680,
+        -320
+      ],
+      "id": "dc2c7f5a-c41d-4445-a034-a60e977bd805",
+      "name": "Update row + retries"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d14c56b-db18-4d52-8909-45b2774d4012",
+              "name": "retryCount",
+              "value": "={{ $('Get_row').item.json.retryCount + 1}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3632,
+        208
+      ],
+      "id": "f71b7cf0-9346-425c-ae7c-19797dac765f",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "message": "Your response has been received. Open a new chat to process another return.",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        -3840,
+        208
+      ],
+      "id": "f5cd182b-13fb-44ac-bebd-0bc565dbeb02",
+      "name": "Respond to chat (chat complete)"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "submitted",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "1ab57c04-c635-4ffe-8e81-a218a81ad3cc"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "00670d3b-cd87-4864-815a-3d243475c032",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "escalated",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -4128,
+        352
+      ],
+      "id": "bbcce40e-dbbb-43b1-8fe4-42dc4b5d2b11",
+      "name": "Check if return is complete"
+    },
+    {
+      "parameters": {
+        "sendTo": "YOUREMAILADDRESS@YOURDOMAIN.COM",
+        "subject": "=Return request: {{ $json.order_number }}",
+        "emailType": "text",
+        "message": "=Return request has been received:\n\nOrder number: {{ $json.order_number }}\nReturn method: {{ $json.return_method }}\nResolution type: {{ $json.resolution_type }}\nReturn reason: {{ $json.return_reason }}\nCustomer email: {{ $json.email_confirmation }}\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -320,
+        544
+      ],
+      "id": "35749d9b-508f-4b88-8441-3eb43a175809",
+      "name": "Send a message1",
+      "webhookId": "301724a6-d721-4a54-b31c-ec64799231b0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wBbIMAt9tf9xEEUe",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d9dd9a6-25e9-4cb3-9a23-9790f166ff3d",
+              "name": "={{ $('Get current step').item.json.name }}",
+              "value": "={{ $('Validate Response1').item.json.output.extracted_information }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2176,
+        592
+      ],
+      "id": "8e09a892-4ee7-479a-baee-52fcebe66b93",
+      "name": "Set data key + value"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "QT4AlFp3ZcHFxVUM",
+          "mode": "list",
+          "cachedResultName": "Returns_agent_configuration",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/QT4AlFp3ZcHFxVUM"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('Get current step').item.json.id + 1 }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1696,
+        816
+      ],
+      "id": "4be88239-7224-409c-97b3-0d6643786cea",
+      "name": "Next step available?",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('row_details').item.json.row.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "currentStepIndex",
+              "displayName": "currentStepIndex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "retryCount",
+              "displayName": "retryCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "order_number",
+              "displayName": "order_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "return_reason",
+              "displayName": "return_reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "item_condition",
+              "displayName": "item_condition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "resolution_type",
+              "displayName": "resolution_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email_confirmation",
+              "displayName": "email_confirmation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "return_method",
+              "displayName": "return_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "escalation_message",
+              "displayName": "escalation_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1952,
+        736
+      ],
+      "id": "de51063c-59dc-429c-a048-dec9f6b21c73",
+      "name": "Store data"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "QT4AlFp3ZcHFxVUM",
+          "mode": "list",
+          "cachedResultName": "Returns_agent_configuration",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/QT4AlFp3ZcHFxVUM"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $json.row.currentStepIndex }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -3184,
+        400
+      ],
+      "id": "f0236a70-387f-41fe-bb03-84551d8b34c4",
+      "name": "Get current step"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "id": "2c134f79-9935-48c7-98e3-2e729537b19b",
+      "name": "Conversation Memory1",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -2768,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "textFormat": {
+            "textOptions": {
+              "type": "json_object"
+            }
+          }
+        }
+      },
+      "id": "8a7ec587-fa8b-4f32-86b4-fcf25c18b457",
+      "name": "OpenAI Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2928,
+        624
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "ZOpj5TOQEHDUyvZz",
+          "name": "OpenAi account 2 (AW)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"valid\": false,\n    \"extracted_information\": \"information\",\n\t\"responseToUser\": \"please provide your response in the following format\",\n\t\"escalate_to_support\": false,\n\t\"restart\": false\n}"
+      },
+      "id": "d557ecfb-245d-40f6-9ac4-d72e46e341f4",
+      "name": "Validation Output Parser1",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -2608,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an agent that will assist customers process returns. You are friendly but focused on the task at hand. You are focused on data validation and extraction of the necessary data.\n\nYour task is to:\n1. Analyze the user's response to the current question\n2. Extract the requested information based on the current state\n3. Validate that the response meets the requirements\n4. Return the extracted data in the structured format. The responseToUser field should be populated with a friendly response for the customer. Acknowledge their message in a friendly manner but stay on track. Only respond with the answers related to this step. Don't provide a sign off or offer for help with other items.\n\nQuestion:\n- {{ $json.question }}\n\nValidation rules:\n- {{ $json.validationRule }}\n\nAgent instructions:\n{{ $json.agentInstructions }}\n\nValid should only be set as TRUE when the user has provide the necessary information. Otherwise, return valid = false and provide a user response as necessary.\n\nIf validation fails, set valid to false and provide a helpful response to the user explaining what's wrong.\n\nIf there are 6 repeated attempts with no successful validation, set escalate_to_support to true. Otherwise escalate_to_support should be false.\n\nIf the user wants to start over or revert to a previous step, mention that you are going to start again and set restart to true. Otherwise restart should be false."
+        }
+      },
+      "id": "63aa5087-835e-412c-a9b4-1dae07f9e38a",
+      "name": "Validate Response1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -2832,
+        400
+      ],
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0cc1cb6f-2941-4a1d-b079-805007a495b9",
+              "name": "row",
+              "value": "={{ $json }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3408,
+        400
+      ],
+      "id": "a87c1592-adca-4a75-bc99-489f2b474429",
+      "name": "row_details"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "079b4671-f530-4569-9774-0a50938c493a",
+              "leftValue": "={{ $('Get_row').item.json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -3840,
+        416
+      ],
+      "id": "e9d454ea-b583-4024-9640-947315eb4c3b",
+      "name": "Row_exists?"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "session_id",
+              "keyValue": "={{ $json.sessionId }}"
+            }
+          ]
+        },
+        "limit": 1
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -4336,
+        352
+      ],
+      "id": "87b53483-2b66-43ce-97a3-466d1b4ec5bc",
+      "name": "Get_row",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Get_row').item.json.retryCount}}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lt"
+                    },
+                    "id": "e75b75f8-e4c5-422f-921b-92f698bcc38c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Not exceeded retries"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Exceeded retries"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2016,
+        -176
+      ],
+      "id": "38d28408-e1dd-4cea-9304-e2699536482e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('row_details').item.json.row.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "escalation_message": "={{ $json.chatInput }}",
+            "status": "escalated"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "currentStepIndex",
+              "displayName": "currentStepIndex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "retryCount",
+              "displayName": "retryCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "order_number",
+              "displayName": "order_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_reason",
+              "displayName": "return_reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "resolution_type",
+              "displayName": "resolution_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "email_confirmation",
+              "displayName": "email_confirmation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_method",
+              "displayName": "return_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "escalation_message",
+              "displayName": "escalation_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "item_condition",
+              "displayName": "item_condition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1440,
+        48
+      ],
+      "id": "59930c4d-e8fb-47f8-8387-0e79c299f5e0",
+      "name": "Add escalation message"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('row_details').item.json.row.id }}"
+            }
+          ]
+        },
+        "limit": 1
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1216,
+        0
+      ],
+      "id": "83b28d07-56e2-4887-9f76-258932b10610",
+      "name": "Get incomplete row"
+    },
+    {
+      "parameters": {
+        "message": "Sorry it seems that we're having issues competing this request. Please write a message below and we'll forward it to support along with your request. Please provide as much detail as possible along with your details and contact information.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        -1664,
+        96
+      ],
+      "id": "009963f1-7baa-4940-9fc5-ee8afaac4fd5",
+      "name": "Respond to Chat - Escalate to support"
+    },
+    {
+      "parameters": {
+        "message": "=Let's start again. {{ $('Get first step').item.json.question }}",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        -1216,
+        -368
+      ],
+      "id": "921f60e7-177a-4456-b3d2-8a5b6503534d",
+      "name": "Respond to Chat - Start Again"
+    },
+    {
+      "parameters": {
+        "message": "={{ $('Validate Response1').item.json.output.responseToUser }}\n\n{{ $('Next step available?').item.json.question }}",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        -1136,
+        1232
+      ],
+      "id": "0949b870-1020-4754-87ea-a4c838c0901f",
+      "name": "Next question to user"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('row_details').item.json.row.id }}"
+            }
+          ]
+        },
+        "limit": 1
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -880,
+        704
+      ],
+      "id": "c14846c9-f4af-48fe-ac07-abebcbab85c2",
+      "name": "Get completed row"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('row_details').item.json.row.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "submitted"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "currentStepIndex",
+              "displayName": "currentStepIndex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "retryCount",
+              "displayName": "retryCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "order_number",
+              "displayName": "order_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_reason",
+              "displayName": "return_reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_condition",
+              "displayName": "item_condition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "resolution_type",
+              "displayName": "resolution_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "email_confirmation",
+              "displayName": "email_confirmation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_method",
+              "displayName": "return_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "escalation_message",
+              "displayName": "escalation_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1136,
+        768
+      ],
+      "id": "ef843c91-1c8b-4a97-9285-bf1d850c24e1",
+      "name": "Mark as complete"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('row_details').item.json.row.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "currentStepIndex": "={{ $json.id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "currentStepIndex",
+              "displayName": "currentStepIndex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "retryCount",
+              "displayName": "retryCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "order_number",
+              "displayName": "order_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_reason",
+              "displayName": "return_reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_condition",
+              "displayName": "item_condition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "resolution_type",
+              "displayName": "resolution_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "email_confirmation",
+              "displayName": "email_confirmation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_method",
+              "displayName": "return_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "escalation_message",
+              "displayName": "escalation_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -1136,
+        1008
+      ],
+      "id": "258e43c1-8cb9-48af-be96-2eeb47002f85",
+      "name": "Update to next step"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "number",
+                      "operation": "notExists",
+                      "singleValue": true
+                    },
+                    "id": "f57a9e53-8485-4c63-909e-c7980ba17493"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No more steps"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "More steps to complete"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1440,
+        944
+      ],
+      "id": "eafe02b5-0047-4a92-92ed-b5a7953b7a18",
+      "name": "More steps available?"
+    },
+    {
+      "parameters": {
+        "message": "Thank you. I have forwarded your request to our support. You will receive an email with the next steps.",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        576
+      ],
+      "id": "c5c7add4-1246-43b1-a9fe-5080478760f0",
+      "name": "Respond to Chat - Chat Completed"
+    },
+    {
+      "parameters": {
+        "sendTo": "YOUREMAILADDRESS@YOURDOMAIN.COM",
+        "subject": "=Support escalation: {{ $json.email_confirmation }}",
+        "message": "=Support request via agent could not be completed by user:\n\nMessage from user:\n{{ $('Respond to Chat - Escalate to support').item.json.chatInput }}\n\nOrder number: {{ $json.order_number }}\nReturn method: {{ $json.return_method }}\nResolution type: {{ $json.resolution_type }}\nReturn reason: {{ $json.return_reason }}\nCustomer email: {{ $json.email_confirmation }}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -944,
+        -16
+      ],
+      "id": "d63bcd63-64fd-4663-a2db-db1c0ccd77b8",
+      "name": "Send a message",
+      "webhookId": "301724a6-d721-4a54-b31c-ec64799231b0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wBbIMAt9tf9xEEUe",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "O9ZN8RiMMFf7QBad",
+          "mode": "list",
+          "cachedResultName": "Return_requests",
+          "cachedResultUrl": "/projects/tCWZBLpIXxOWy1g1/datatables/O9ZN8RiMMFf7QBad"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "session_id": "={{ $('When chat message received').item.json.sessionId }}",
+            "status": "open",
+            "currentStepIndex": "1",
+            "retryCount": 0
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "currentStepIndex",
+              "displayName": "currentStepIndex",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "retryCount",
+              "displayName": "retryCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "order_number",
+              "displayName": "order_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_reason",
+              "displayName": "return_reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "resolution_type",
+              "displayName": "resolution_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "email_confirmation",
+              "displayName": "email_confirmation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "return_method",
+              "displayName": "return_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "escalation_message",
+              "displayName": "escalation_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "item_condition",
+              "displayName": "item_condition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -3632,
+        512
+      ],
+      "id": "f677025e-656e-41cc-8adf-e8ac5f7abc9a",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output.responseToUser }}",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "id": "8a7e61b4-41ab-40ac-9b59-7b6470c31cc6",
+      "name": "Show Validation Error",
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        -1856,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.restart }}",
+                    "rightValue": true,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true"
+                    },
+                    "id": "6d8be655-094d-4510-a6fe-62821698da99"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "RESTART"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.escalate_to_support }}",
+                    "rightValue": true,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true"
+                    },
+                    "id": "67289272-30f8-474c-93b4-fc49418612ae"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ESCALATE"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.valid }}",
+                    "rightValue": false,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "false"
+                    },
+                    "id": "b67d9c82-0746-4de8-bf48-21cf6c8ddde7"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "INVALID"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.valid }}",
+                    "rightValue": true,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true"
+                    },
+                    "id": "24815e95-4f56-429c-b733-e546decb3520"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "VALID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "80fb0113-8129-4109-8634-047d8feaff5d",
+      "name": "Check Validation Result",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -2416,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nTo process your return, please provide your order number.",
+        "options": {
+          "responseMode": "responseNodes"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -4544,
+        352
+      ],
+      "id": "ac679d2e-64fc-4b51-9f71-6f0ee129eec0",
+      "name": "When chat message received",
+      "webhookId": "49d35643-e505-42ba-a9f2-7150e4d6b473"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Update row + retries": {
+      "main": [
+        [
+          {
+            "node": "Get first step",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to chat (chat complete)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if return is complete": {
+      "main": [
+        [
+          {
+            "node": "Respond to chat (chat complete)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to chat (chat complete)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Row_exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set data key + value": {
+      "main": [
+        [
+          {
+            "node": "Store data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store data": {
+      "main": [
+        [
+          {
+            "node": "Next step available?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get current step": {
+      "main": [
+        [
+          {
+            "node": "Validate Response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Response1": {
+      "main": [
+        [
+          {
+            "node": "Check Validation Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversation Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Validate Response1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Validate Response1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validation Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Validate Response1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "row_details": {
+      "main": [
+        [
+          {
+            "node": "Get current step",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Row_exists?": {
+      "main": [
+        [
+          {
+            "node": "row_details",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_row": {
+      "main": [
+        [
+          {
+            "node": "Check if return is complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Update row + retries",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Chat - Escalate to support",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add escalation message": {
+      "main": [
+        [
+          {
+            "node": "Get incomplete row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat - Escalate to support": {
+      "main": [
+        [
+          {
+            "node": "Add escalation message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get first step": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat - Start Again",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Next step available?": {
+      "main": [
+        [
+          {
+            "node": "More steps available?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark as complete": {
+      "main": [
+        [
+          {
+            "node": "Get completed row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "More steps available?": {
+      "main": [
+        [
+          {
+            "node": "Mark as complete",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Next question to user",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update to next step",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get completed row": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat - Chat Completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "row_details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Validation Result": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Chat - Escalate to support",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Show Validation Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set data key + value",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Get_row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "0e11806f-dc5a-409b-ad8b-607896435aa9",
+  "meta": {
+    "instanceId": "b5d1ea132a4e071e6288b3143f31284b91560858bdef3f0c88a49f587fc91a29"
+  },
+  "id": "QHs0ZebCUCr6tkcisy7Lo",
+  "tags": [
+    {
+      "updatedAt": "2025-05-12T13:43:59.783Z",
+      "createdAt": "2025-05-12T13:43:59.783Z",
+      "id": "d3ygIhrGjDmzgrW0",
+      "name": "TheAIAutomators.com"
+    }
+  ]
+}

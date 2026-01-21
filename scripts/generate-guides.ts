@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderToFile } from '@react-pdf/renderer';
+import { renderToFile, DocumentProps } from '@react-pdf/renderer';
 import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
@@ -42,7 +42,7 @@ async function generateGuide(locale: 'en' | 'es', photoPath: string): Promise<vo
     React.createElement(BuyersGuide, {
       locale,
       photoPath: photoPath || undefined,
-    }),
+    }) as React.ReactElement<DocumentProps>,
     outputPath
   );
 

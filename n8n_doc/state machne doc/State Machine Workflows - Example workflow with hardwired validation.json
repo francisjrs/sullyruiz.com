@@ -1,0 +1,1099 @@
+{
+  "name": "State Machine Workflows - Example workflow with hardwired validation",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "responseNodes"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -992,
+        1072
+      ],
+      "id": "2926810f-8c6f-4650-a9a7-a18a18651f3a",
+      "name": "When chat message received",
+      "webhookId": "05863459-806d-4bf9-940f-72bdaaa88aa2"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output.responseToUser }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        880
+      ],
+      "id": "8352a01b-e629-4627-a529-cc16e87299b6",
+      "name": "Respond to Chat1"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"valid\": false,\n    \"extracted_information\": \"information\",\n\t\"responseToUser\": \"please provide your response in the following format\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -32,
+        1296
+      ],
+      "id": "2f01887e-76e4-4172-ad66-797a3f6c58e2",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -368,
+        1296
+      ],
+      "id": "4baf3ad6-aa32-4365-8e61-f6b2a488938e",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZOpj5TOQEHDUyvZz",
+          "name": "OpenAi account 2 (AW)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -208,
+        1296
+      ],
+      "id": "a6d7f6a9-a8bf-4ff3-83d7-93f9b2fd566b",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a data validation and extraction assistant.\n\nYour task is to:\n1. Analyze the user's response to the current question\n2. Extract the requested information based on the current state\n3. Validate that the response meets the requirements\n4. Return the extracted data in the structured format\n\nValidation rules:\n- Must be a name\n\nIf validation fails, set valid to false and provide a response to the user.\n\nIf there are 3 repeated attempts with no successful validation escalate_to_support = true. Otherwise escalate_to_support should be false.\n\nIf the user wants to start over or revert to a previous step, mention that you are going to start again. restart = true. Otherwise restart = false.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -256,
+        1072
+      ],
+      "id": "3207e4f0-bcae-4b58-9b49-5170e1315821",
+      "name": "Validate and extract",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Validate and extract').first().json.output.valid }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "a8a17794-5b97-4757-a427-491872a93d8f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "VALID RESPONSE"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        144,
+        1072
+      ],
+      "id": "becfb58c-7cf6-405f-9dad-8402a809416d",
+      "name": "IF"
+    },
+    {
+      "parameters": {
+        "message": "=Thanks. Now please provide your email address.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        560,
+        1056
+      ],
+      "id": "4a110ffb-40db-4f21-8380-701cff06316b",
+      "name": "Respond to Chat5"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output.responseToUser }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        880,
+        864
+      ],
+      "id": "102f435e-584c-4300-bca5-9ce73c356743",
+      "name": "Respond to Chat2"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"valid\": false,\n    \"extracted_information\": \"information\",\n\t\"responseToUser\": \"please provide your response in the following format\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1440,
+        1280
+      ],
+      "id": "270d85ec-7825-4dd4-9e2a-b797f0305f51",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1104,
+        1280
+      ],
+      "id": "ff008eea-a157-4511-a6aa-b6b01dc2a2f1",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZOpj5TOQEHDUyvZz",
+          "name": "OpenAi account 2 (AW)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1264,
+        1280
+      ],
+      "id": "0065f1d3-de43-42f0-9c9a-b740b7801c91",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a data validation and extraction assistant.\n\nYour task is to:\n1. Analyze the user's response to the current question\n2. Extract the requested information based on the current state\n3. Validate that the response meets the requirements\n4. Return the extracted data in the structured format\n\nValidation rules:\n- Must be a valid email address.\n\nIf validation fails, set valid to false and provide a response to the user.\n\nIf there are 3 repeated attempts with no successful validation escalate_to_support = true. Otherwise escalate_to_support should be false.\n\nIf the user wants to start over or revert to a previous step, mention that you are going to start again. restart = true. Otherwise restart = false.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1216,
+        1056
+      ],
+      "id": "21381bb9-ba2e-4bf2-b633-0814d2149fc4",
+      "name": "Validate and extract1",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Validate and extract1').first().json.output.valid }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "a8a17794-5b97-4757-a427-491872a93d8f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "VALID RESPONSE"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        1616,
+        1056
+      ],
+      "id": "cbd9a318-7681-4e4c-af88-c80207b2ff02",
+      "name": "IF1"
+    },
+    {
+      "parameters": {
+        "message": "=Thanks. Now please provide your user ID.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        2048,
+        1040
+      ],
+      "id": "9881dcfb-11d7-4af9-be50-86263637e3e3",
+      "name": "Respond to Chat6"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output.responseToUser }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        2368,
+        848
+      ],
+      "id": "0b832ec1-9770-4dcb-a44b-dbc01e65bfbe",
+      "name": "Respond to Chat3"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"valid\": false,\n    \"extracted_information\": \"information\",\n\t\"responseToUser\": \"please provide your response in the following format\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2928,
+        1264
+      ],
+      "id": "f6a0cc83-fa21-4461-8b6e-1e8f1ade0350",
+      "name": "Structured Output Parser3"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        2592,
+        1264
+      ],
+      "id": "dd5113bc-f8ff-45b3-b11e-5b041e38f6e2",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZOpj5TOQEHDUyvZz",
+          "name": "OpenAi account 2 (AW)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2752,
+        1264
+      ],
+      "id": "2857be2a-67fc-4d00-ae81-c241e076957f",
+      "name": "Simple Memory3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a data validation and extraction assistant.\n\nYour task is to:\n1. Analyze the user's response to the current question\n2. Extract the requested information based on the current state\n3. Validate that the response meets the requirements\n4. Return the extracted data in the structured format\n\nValidation rules:\n- Must be a 6 digit user ID.\n\nIf validation fails, set valid to false and provide a response to the user.\n\nIf there are 3 repeated attempts with no successful validation escalate_to_support = true. Otherwise escalate_to_support should be false.\n\nIf the user wants to start over or revert to a previous step, mention that you are going to start again. restart = true. Otherwise restart = false.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        2704,
+        1040
+      ],
+      "id": "939f58d8-37d6-4888-9b56-dac2d66c01ff",
+      "name": "Validate and extract2",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Validate and extract2').first().json.output.valid }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "a8a17794-5b97-4757-a427-491872a93d8f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "VALID RESPONSE"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        3104,
+        1040
+      ],
+      "id": "b71728d6-4a69-4f39-9137-53f4c1d1973c",
+      "name": "IF2"
+    },
+    {
+      "parameters": {
+        "message": "=Please provide the request or issue you are experiencing.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        3504,
+        1024
+      ],
+      "id": "e88c3f3f-59c8-4328-aadd-eea99d62d0aa",
+      "name": "Respond to Chat7"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output.responseToUser }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        3824,
+        832
+      ],
+      "id": "509c54b8-8191-4447-b8ee-f736a6b48210",
+      "name": "Respond to Chat4"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"valid\": false,\n    \"extracted_information\": \"information\",\n\t\"responseToUser\": \"please provide your response in the following format\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        4384,
+        1248
+      ],
+      "id": "dee632fa-4ffd-43a7-bfcd-f50147300252",
+      "name": "Structured Output Parser4"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        4048,
+        1248
+      ],
+      "id": "978565b5-3b4d-4dd6-af14-90be997ef9e5",
+      "name": "OpenAI Chat Model4",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZOpj5TOQEHDUyvZz",
+          "name": "OpenAi account 2 (AW)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        4208,
+        1248
+      ],
+      "id": "c02a9bb2-30a0-4329-a2be-adff3198ddf8",
+      "name": "Simple Memory4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a data validation and extraction assistant.\n\nYour task is to:\n1. Analyze the user's response to the current question\n2. Extract the requested information based on the current state\n3. Validate that the response meets the requirements\n4. Return the extracted data in the structured format\n\nValidation rules:\n- Must be a description of an issue or request. If it is not, set valid = false.\n\nIf validation fails, set valid to false and provide a response to the user.\n\nIf there are 3 repeated attempts with no successful validation escalate_to_support = true. Otherwise escalate_to_support should be false.\n\nIf the user wants to start over or revert to a previous step, mention that you are going to start again. restart = true. Otherwise restart = false.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        4160,
+        1024
+      ],
+      "id": "7ad94a52-c3fd-4866-a113-277fe0adc665",
+      "name": "Validate and extract3",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Validate and extract3').first().json.output.valid }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "a8a17794-5b97-4757-a427-491872a93d8f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "VALID RESPONSE"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        4560,
+        1024
+      ],
+      "id": "e475a8b3-edfc-40f1-b722-4872a127c6cb",
+      "name": "IF3"
+    },
+    {
+      "parameters": {
+        "message": "We've sent this message to our support. You should receive a response within 48 hours.",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        5120,
+        1008
+      ],
+      "id": "e45816aa-68ee-4b1c-8abb-e8d3931c7ef0",
+      "name": "Respond to Chat8"
+    },
+    {
+      "parameters": {
+        "sendTo": "YOUREMAILADDRESS@YOURDOMAIN.COM",
+        "subject": "=Support query:  {{ $json.email }}",
+        "message": "=Support message:<br><br>\n\nName: {{ $json.name }}<br>\nEmail: {{ $json.email }}<br>\nUser Id: {{ $json.user_id }}<br>\nRequest: {{ $json.request_content }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5632,
+        1008
+      ],
+      "id": "60bad496-a600-4185-a9b1-409b18826950",
+      "name": "Send a message1",
+      "webhookId": "3bcd473a-46bd-41ad-80b5-9688247d7af6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wBbIMAt9tf9xEEUe",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "015ad533-eafb-4f07-a3e0-b501693dce5d",
+              "name": "name",
+              "value": "={{ $('Validate and extract').item.json.output.extracted_information }}",
+              "type": "string"
+            },
+            {
+              "id": "1a9ba953-73e9-4408-9997-afbd1a4940d7",
+              "name": "email",
+              "value": "={{ $('Validate and extract1').item.json.output.extracted_information }}",
+              "type": "string"
+            },
+            {
+              "id": "64e5b7ff-6f5e-49ad-9643-7129d537be03",
+              "name": "user_id",
+              "value": "={{ $('Validate and extract2').item.json.output.extracted_information }}",
+              "type": "string"
+            },
+            {
+              "id": "ff45c3e7-2daf-4025-b0a0-5a11628d9947",
+              "name": "request_content",
+              "value": "={{ $('Validate and extract3').item.json.output.extracted_information }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5344,
+        1008
+      ],
+      "id": "1c296f07-b753-464f-abad-220c3efa1350",
+      "name": "Collect extracted data"
+    },
+    {
+      "parameters": {
+        "content": "## <- Connect this node\nWhen you want to start sending emails",
+        "height": 256,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5600,
+        928
+      ],
+      "typeVersion": 1,
+      "id": "c2db3e65-f0d0-450b-8724-de2b5e69b776",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "[![The AI Automators](https://www.theaiautomators.com/wp-content/uploads/2025/03/gray-logo.png)](https://www.theaiautomators.com/)",
+        "height": 380,
+        "width": 580,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        112
+      ],
+      "id": "461c5f46-9f8c-4d4f-9227-6d9dcf89ba37",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "@[youtube](QYLvnWAzcYY)",
+        "height": 384,
+        "width": 656,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        112
+      ],
+      "id": "9ae70567-367c-4097-9a56-29e71fbdf069",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "# Note: This is An Example Validation Workflow\nWithin the video above, I explained how to hardware validation instead of using the \"response to chat\" node.\nThis is not a fully featured template, but rather an example of that concept if you need to implement it.",
+        "height": 268,
+        "width": 884,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        528
+      ],
+      "id": "c8e6fc0d-a6d7-4f39-8431-dc79c0b24f0d",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat1": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Validate and extract",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Validate and extract",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Validate and extract",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and extract": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Chat1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat5": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat2": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Validate and extract1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Validate and extract1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "Validate and extract1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and extract1": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat6",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Chat2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat6": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat3": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser3": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Validate and extract2",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Validate and extract2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory3": {
+      "ai_memory": [
+        [
+          {
+            "node": "Validate and extract2",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and extract2": {
+      "main": [
+        [
+          {
+            "node": "IF2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Chat3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat7": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat4": {
+      "main": [
+        [
+          {
+            "node": "Validate and extract3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser4": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Validate and extract3",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Validate and extract3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory4": {
+      "ai_memory": [
+        [
+          {
+            "node": "Validate and extract3",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and extract3": {
+      "main": [
+        [
+          {
+            "node": "IF3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF3": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat8",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Chat4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat8": {
+      "main": [
+        [
+          {
+            "node": "Collect extracted data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Collect extracted data": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "061db011-4f02-45ce-93b7-24c863d57525",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b5d1ea132a4e071e6288b3143f31284b91560858bdef3f0c88a49f587fc91a29"
+  },
+  "id": "POXakxAoGCLH63xD",
+  "tags": [
+    {
+      "updatedAt": "2025-05-12T13:43:59.783Z",
+      "createdAt": "2025-05-12T13:43:59.783Z",
+      "id": "d3ygIhrGjDmzgrW0",
+      "name": "TheAIAutomators.com"
+    }
+  ]
+}

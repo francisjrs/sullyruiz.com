@@ -315,5 +315,155 @@
     "submitError": "Algo salió mal. Por favor intenta de nuevo.",
     "networkError": "No se puede conectar. Por favor verifica tu conexión.",
     "retry": "Intentar de Nuevo"
+  },
+  "screening": {
+    "header": {
+      "subtitle": "Cuestionario de Pre-Calificación"
+    },
+    "steps": {
+      "contact": {
+        "title": "Información de Contacto",
+        "description": "Comencemos con tus datos de contacto básicos."
+      },
+      "preapproval": {
+        "title": "Estado de Pre-Aprobación",
+        "description": "Ayúdanos a entender tu preparación hipotecaria actual."
+      },
+      "income": {
+        "title": "Ingresos y Empleo",
+        "description": "Cuéntanos sobre tu situación laboral actual."
+      },
+      "credit": {
+        "title": "Crédito e Historial Financiero",
+        "description": "Entender tu crédito nos ayuda a encontrar las mejores opciones."
+      },
+      "savings": {
+        "title": "Enganche y Ahorros",
+        "description": "Hablemos de tus ahorros para la compra."
+      },
+      "timeline": {
+        "title": "Cronograma y Preferencias de Propiedad",
+        "description": "¿Cuándo y qué estás buscando comprar?"
+      },
+      "additional": {
+        "title": "Información Adicional",
+        "description": "¿Hay algo más que debamos saber?"
+      }
+    },
+    "fields": {
+      "fullName": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "phone": "Número de Teléfono",
+      "hasPreapproval": "¿Tienes una pre-aprobación hipotecaria?",
+      "immigrationStatus": "¿Cuál es tu estatus migratorio?",
+      "monthlyIncome": "Ingreso Mensual Bruto ($)",
+      "monthlyDebt": "Deudas Mensuales Actuales (préstamos de auto, tarjetas de crédito, etc.)",
+      "paymentType": "¿Cómo te pagan?",
+      "employmentType": "¿Qué tipo de empleo tienes?",
+      "creditScore": "¿Cuál es tu puntaje de crédito aproximado?",
+      "hasAutoLoan": "¿Tienes un préstamo de auto?",
+      "hasCreditCards": "¿Tienes tarjetas de crédito?",
+      "taxYears": "¿Cuántos años has declarado impuestos?",
+      "downPayment": "¿Cuánto tienes para el enganche? ($)",
+      "savingsLocation": "¿Dónde están ubicados tus ahorros?",
+      "leaseEndDate": "¿Cuándo termina tu contrato de arrendamiento actual? (si aplica)",
+      "moveDate": "¿Cuándo necesitas mudarte?",
+      "propertyType": "¿Qué tipo de propiedad estás buscando?",
+      "isHomeowner": "¿Eres actualmente propietario de una casa?",
+      "willSellHome": "¿Necesitarás vender tu casa actual?",
+      "buyingWith": "¿Compras solo o con alguien?",
+      "militaryService": "¿Has servido en las fuerzas armadas?",
+      "additionalInfo": "¿Algo más que quieras que sepamos?"
+    },
+    "placeholders": {
+      "fullName": "Ingresa tu nombre completo",
+      "email": "tu@correo.com",
+      "phone": "(555) 123-4567",
+      "monthlyIncome": "ej., 5000",
+      "monthlyDebt": "Lista tus pagos mensuales de deuda...",
+      "downPayment": "ej., 15000",
+      "leaseEndDate": "ej., Marzo 2026",
+      "additionalInfo": "Comparte cualquier información adicional que pueda ayudarnos a servirte mejor..."
+    },
+    "options": {
+      "yes": "Sí",
+      "no": "No",
+      "immigrationStatus": {
+        "citizen": "Ciudadano Estadounidense",
+        "resident": "Residente Permanente",
+        "workVisa": "Visa de Trabajo",
+        "itin": "ITIN"
+      },
+      "paymentType": {
+        "hourly": "Por Hora",
+        "salary": "Salario Fijo",
+        "commission": "Comisiones",
+        "contractor": "Contratista",
+        "other": "Otro"
+      },
+      "employmentType": {
+        "w2": "Empleado W2",
+        "1099": "Contratista Independiente 1099",
+        "none": "Sin Empleo Actualmente"
+      },
+      "creditScore": {
+        "700plus": "700+ (Excelente)",
+        "640to699": "640-699 (Bueno)",
+        "600to639": "600-639 (Regular)",
+        "below600": "Menos de 600 (Necesita Mejorar)",
+        "unknown": "No lo Sé"
+      },
+      "taxYears": {
+        "twoPlus": "2 años o más",
+        "one": "1 año",
+        "never": "Nunca he declarado"
+      },
+      "savingsLocation": {
+        "bank": "Cuenta Bancaria",
+        "cash": "Efectivo",
+        "both": "Ambos"
+      },
+      "moveDate": {
+        "under1month": "Menos de 1 mes",
+        "1to3months": "1-3 meses",
+        "3to6months": "3-6 meses",
+        "6plusMonths": "6+ meses"
+      },
+      "propertyType": {
+        "newHome": "Casa Nueva",
+        "resale": "Casa de Reventa",
+        "mobile": "Casa Móvil",
+        "traditional": "Casa Tradicional",
+        "land": "Terreno / Lote",
+        "apartment": "Apartamento",
+        "condo": "Condominio / Townhouse"
+      },
+      "willSellHome": {
+        "yes": "Sí",
+        "no": "No",
+        "notApplicable": "No Aplica"
+      },
+      "buyingWith": {
+        "alone": "Comprando Solo",
+        "withSomeone": "Comprando Con Alguien"
+      },
+      "militaryService": {
+        "yes": "Sí, soy veterano",
+        "no": "No",
+        "notEnoughTime": "Sí, pero no suficiente tiempo de servicio"
+      }
+    },
+    "navigation": {
+      "back": "Atrás",
+      "next": "Continuar",
+      "submit": "Enviar"
+    },
+    "errors": {
+      "required": "Este campo es requerido"
+    },
+    "success": {
+      "title": "¡Gracias!",
+      "message": "Tu cuestionario de pre-calificación ha sido enviado. Revisaremos tu información y te contactaremos dentro de 24 horas para discutir tus opciones de compra de casa."
+    }
   }
 }

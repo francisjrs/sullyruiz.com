@@ -1,0 +1,7 @@
+﻿id,name,question,validationRule,agentInstructions,createdAt,updatedAt
+3,resolution_type,Would you prefer a refund or store credit? Refunds may take a few days to be reflected in your account after return. Store credit is applied as soon as we've verified the return.,must be one of the 2 options,you can infer the response based on the user. They don't have to enter the exact word.,2026-01-08T15:13:09.198Z,2026-01-09T16:44:37.289Z
+4,return_method,Will you be shipping the product back or returning it to our store?,conditional: only if exchange,If the user asks where to return: https://www.mystore.com/storelocations - If they wish to ship it back we will provide a return label and send it via email.,2026-01-08T15:13:09.749Z,2026-01-09T16:46:26.766Z
+2,return_reason,Why are you returning? (defective/wrong product/wrong size or fit),must be one of the 3 options,you can infer the response based on the user. They don't have to enter the exact word.,2026-01-08T15:13:08.080Z,2026-01-09T16:49:18.930Z
+5,email_confirmation,Please provide your email address,must be a valid email address,,2026-01-09T15:53:55.477Z,2026-01-09T15:54:05.865Z
+1,order_number,"What's your order number? ","Accept order numbers in format: ORD-XXXXXXX (7 digits)
+Also accept invoice numbers: INV-XXXXXX","If user says ""I don't have it"", guide them: ""Check your order confirmation email or your account order history""",2026-01-08T15:12:09.768Z,2026-01-09T16:40:42.640Z
