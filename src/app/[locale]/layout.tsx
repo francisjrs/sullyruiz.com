@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { ToastProvider } from "@/components/toast-provider";
 import "../globals.css";
 
 const montserrat = Montserrat({
@@ -65,7 +66,7 @@ export default async function LocaleLayout({
         className={`${montserrat.variable} ${cormorant.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <ToastProvider>{children}</ToastProvider>
         </NextIntlClientProvider>
       </body>
     </html>

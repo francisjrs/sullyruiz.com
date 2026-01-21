@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowLeft, Check, Loader2, Send } from "lucide-react";
+import { X, Check, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -13,6 +13,8 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { getSessionData, clearSession } from "@/lib/session";
+import { validateName, validatePhone, validateEmail } from "@/lib/validation";
+import { useToast } from "@/components/toast-provider";
 
 type FlowType = "buy" | "sell" | null;
 type Step =
@@ -45,8 +47,10 @@ interface ChatWizardProps {
 
 export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
   const t = useTranslations("chat");
+  const tValidation = useTranslations("validation");
   const locale = useLocale();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   const [flow, setFlow] = useState<FlowType>(initialFlow ?? null);
   const [step, setStep] = useState<Step>("welcome");
@@ -54,6 +58,15 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
   const [isTyping, setIsTyping] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fieldError, setFieldError] = useState<string | null>(null);
+
+  const getErrorMessage = (errorKey: string): string => {
+    const parts = errorKey.split(".");
+    if (parts[0] === "validation" && parts.length >= 3) {
+      return tValidation(`${parts[1]}.${parts[2]}`);
+    }
+    return tValidation("submitError");
+  };
 
   // Form data
   const [formData, setFormData] = useState({
@@ -75,6 +88,7 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
       setFlow(initialFlow ?? null);
       setStep("welcome");
       setMessages([]);
+      setFieldError(null);
       setFormData({
         flow: "",
         propertyType: "",
@@ -336,8 +350,35 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
   const handleInputSubmit = async () => {
     if (!inputValue.trim()) return;
 
-    addUserMessage(inputValue);
-    const value = inputValue;
+    const value = inputValue.trim();
+
+    // Validate based on current step
+    if (step === "contactName") {
+      const result = validateName(value);
+      if (!result.valid && result.error) {
+        setFieldError(getErrorMessage(result.error));
+        return;
+      }
+    } else if (step === "contactPhone") {
+      // Phone is optional but must be valid format if provided
+      if (value) {
+        const result = validatePhone(value);
+        if (!result.valid && result.error) {
+          setFieldError(getErrorMessage(result.error));
+          return;
+        }
+      }
+    } else if (step === "contactEmail") {
+      const result = validateEmail(value);
+      if (!result.valid && result.error) {
+        setFieldError(getErrorMessage(result.error));
+        return;
+      }
+    }
+
+    // Clear any previous error
+    setFieldError(null);
+    addUserMessage(value);
     setInputValue("");
 
     if (step === "address") {
@@ -393,9 +434,26 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
       if (response.ok) {
         clearSession();
         setStep("success");
+      } else {
+        const responseData = await response.json();
+        // Handle server-side validation errors
+        if (responseData.details) {
+          const errorKeys = Object.keys(responseData.details);
+          if (errorKeys.length > 0) {
+            setFieldError(getErrorMessage(responseData.details[errorKeys[0]]));
+          }
+        }
+        toast({
+          title: tValidation("submitError"),
+          variant: "error",
+        });
       }
     } catch (error) {
       console.error("Error submitting lead:", error);
+      toast({
+        title: tValidation("networkError"),
+        variant: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -537,27 +595,41 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
                 e.preventDefault();
                 handleInputSubmit();
               }}
-              className="flex gap-2"
+              className="space-y-2"
             >
-              <Input
-                type={currentInput.type}
-                placeholder={currentInput.placeholder}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                className="flex-1 rounded-none border-[#BEB09E]/30 focus:border-[#BEB09E] h-12 font-serif text-base"
-                disabled={isSubmitting}
-              />
-              <Button
-                type="submit"
-                disabled={isSubmitting || !inputValue.trim()}
-                className="bg-black text-white hover:bg-[#BEB09E] rounded-none h-12 px-4"
-              >
-                {isSubmitting ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
-                  <Send className="w-5 h-5" />
-                )}
-              </Button>
+              <div className="flex gap-2">
+                <Input
+                  type={currentInput.type}
+                  placeholder={currentInput.placeholder}
+                  value={inputValue}
+                  onChange={(e) => {
+                    setInputValue(e.target.value);
+                    // Clear error when user starts typing
+                    if (fieldError) {
+                      setFieldError(null);
+                    }
+                  }}
+                  aria-invalid={!!fieldError}
+                  className={`flex-1 rounded-none border-[#BEB09E]/30 focus:border-[#BEB09E] h-12 font-serif text-base ${
+                    fieldError ? "border-red-500 focus:border-red-500" : ""
+                  }`}
+                  disabled={isSubmitting}
+                />
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || !inputValue.trim()}
+                  className="bg-black text-white hover:bg-[#BEB09E] rounded-none h-12 px-4"
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
+                </Button>
+              </div>
+              {fieldError && (
+                <p className="text-sm text-red-500 font-serif">{fieldError}</p>
+              )}
             </form>
           </div>
         )}

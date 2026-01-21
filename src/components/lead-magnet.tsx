@@ -1,26 +1,75 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Check, BookOpen, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getSessionId, setCTASource, clearSession } from "@/lib/session";
+import { validateEmail, validateName } from "@/lib/validation";
+import { useToast } from "@/components/toast-provider";
 
 export function LeadMagnet() {
   const t = useTranslations("leadMagnet");
+  const tValidation = useTranslations("validation");
   const locale = useLocale();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { toast } = useToast();
 
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [errors, setErrors] = useState<{ firstName?: string; email?: string }>(
+    {}
+  );
+
+  const getErrorMessage = (errorKey: string): string => {
+    // errorKey is like "validation.email.invalid", we need to extract "email.invalid"
+    const parts = errorKey.split(".");
+    if (parts[0] === "validation" && parts.length >= 3) {
+      return tValidation(`${parts[1]}.${parts[2]}`);
+    }
+    return tValidation("submitError");
+  };
+
+  const validateField = (field: "firstName" | "email", value: string) => {
+    if (field === "firstName") {
+      const result = validateName(value);
+      if (!result.valid && result.error) {
+        setErrors((prev) => ({ ...prev, firstName: getErrorMessage(result.error!) }));
+      } else {
+        setErrors((prev) => ({ ...prev, firstName: undefined }));
+      }
+    } else if (field === "email") {
+      const result = validateEmail(value);
+      if (!result.valid && result.error) {
+        setErrors((prev) => ({ ...prev, email: getErrorMessage(result.error!) }));
+      } else {
+        setErrors((prev) => ({ ...prev, email: undefined }));
+      }
+    }
+  };
+
+  const validateAllFields = (): boolean => {
+    const nameResult = validateName(firstName);
+    const emailResult = validateEmail(email);
+    const newErrors: { firstName?: string; email?: string } = {};
+
+    if (!nameResult.valid && nameResult.error) {
+      newErrors.firstName = getErrorMessage(nameResult.error);
+    }
+    if (!emailResult.valid && emailResult.error) {
+      newErrors.email = getErrorMessage(emailResult.error);
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const features = [
     t("features.feature1"),
@@ -31,7 +80,14 @@ export function LeadMagnet() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Client-side validation
+    if (!validateAllFields()) {
+      return;
+    }
+
     setIsSubmitting(true);
+    setHasError(false);
 
     try {
       // Set CTA source for lead magnet
@@ -55,9 +111,33 @@ export function LeadMagnet() {
         setIsSuccess(true);
         setFirstName("");
         setEmail("");
+        setErrors({});
+      } else {
+        const data = await response.json();
+        // Handle server-side validation errors
+        if (data.details) {
+          const serverErrors: { firstName?: string; email?: string } = {};
+          if (data.details.firstName) {
+            serverErrors.firstName = getErrorMessage(data.details.firstName);
+          }
+          if (data.details.email) {
+            serverErrors.email = getErrorMessage(data.details.email);
+          }
+          setErrors(serverErrors);
+        }
+        setHasError(true);
+        toast({
+          title: tValidation("submitError"),
+          variant: "error",
+        });
       }
     } catch (error) {
       console.error("Error submitting lead:", error);
+      setHasError(true);
+      toast({
+        title: tValidation("networkError"),
+        variant: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -148,10 +228,23 @@ export function LeadMagnet() {
                       id="firstName"
                       type="text"
                       value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                      className="rounded-none border-[#BEB09E]/30 focus:border-[#BEB09E] h-12 font-serif text-lg"
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                        if (errors.firstName) {
+                          validateField("firstName", e.target.value);
+                        }
+                      }}
+                      onBlur={() => validateField("firstName", firstName)}
+                      aria-invalid={!!errors.firstName}
+                      className={`rounded-none border-[#BEB09E]/30 focus:border-[#BEB09E] h-12 font-serif text-lg ${
+                        errors.firstName ? "border-red-500 focus:border-red-500" : ""
+                      }`}
                     />
+                    {errors.firstName && (
+                      <p className="text-sm text-red-500 font-serif">
+                        {errors.firstName}
+                      </p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -165,10 +258,23 @@ export function LeadMagnet() {
                       id="email"
                       type="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="rounded-none border-[#BEB09E]/30 focus:border-[#BEB09E] h-12 font-serif text-lg"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (errors.email) {
+                          validateField("email", e.target.value);
+                        }
+                      }}
+                      onBlur={() => validateField("email", email)}
+                      aria-invalid={!!errors.email}
+                      className={`rounded-none border-[#BEB09E]/30 focus:border-[#BEB09E] h-12 font-serif text-lg ${
+                        errors.email ? "border-red-500 focus:border-red-500" : ""
+                      }`}
                     />
+                    {errors.email && (
+                      <p className="text-sm text-red-500 font-serif">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
 
                   <Button
@@ -178,6 +284,8 @@ export function LeadMagnet() {
                   >
                     {isSubmitting ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : hasError ? (
+                      tValidation("retry")
                     ) : (
                       t("form.submit")
                     )}

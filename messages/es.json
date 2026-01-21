@@ -298,5 +298,21 @@
   "language": {
     "en": "English",
     "es": "Español"
+  },
+  "validation": {
+    "email": {
+      "required": "El correo electrónico es requerido",
+      "invalid": "Por favor ingresa un correo electrónico válido"
+    },
+    "phone": {
+      "invalid": "Por favor ingresa un número de teléfono válido"
+    },
+    "name": {
+      "required": "El nombre es requerido",
+      "tooShort": "El nombre debe tener al menos 2 caracteres"
+    },
+    "submitError": "Algo salió mal. Por favor intenta de nuevo.",
+    "networkError": "No se puede conectar. Por favor verifica tu conexión.",
+    "retry": "Intentar de Nuevo"
   }
 }

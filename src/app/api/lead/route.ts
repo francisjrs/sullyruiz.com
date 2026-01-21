@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { validateLeadPayload, normalizePhone } from "@/lib/validation";
 
 type CTASource =
   | "navbar"
@@ -55,20 +56,18 @@ export async function POST(request: Request) {
       );
     }
 
-    if (body.type === "lead_magnet") {
-      if (!body.contact?.firstName || !body.contact?.email) {
-        return NextResponse.json(
-          { error: "Missing contact information" },
-          { status: 400 }
-        );
-      }
-    } else if (body.type === "chat_wizard") {
-      if (!body.contact?.name || !body.contact?.email) {
-        return NextResponse.json(
-          { error: "Missing contact information" },
-          { status: 400 }
-        );
-      }
+    // Validate contact information with format validation
+    const validationResult = validateLeadPayload(body.contact, body.type);
+    if (!validationResult.valid) {
+      return NextResponse.json(
+        { error: "Validation failed", details: validationResult.errors },
+        { status: 400 }
+      );
+    }
+
+    // Normalize phone number if present (for chat_wizard)
+    if (body.type === "chat_wizard" && body.contact.phone) {
+      body.contact.phone = normalizePhone(body.contact.phone);
     }
 
     // Log the lead (for development)
