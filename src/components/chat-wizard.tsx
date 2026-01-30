@@ -15,6 +15,7 @@ import {
 import { getSessionData, clearSession } from "@/lib/session";
 import { validateName, validatePhone, validateEmail } from "@/lib/validation";
 import { useToast } from "@/components/toast-provider";
+import { trackWizardStep, trackWizardClose, trackLeadGeneration } from "@/lib/analytics";
 
 type FlowType = "buy" | "sell" | null;
 type Step =
@@ -111,20 +112,22 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const addBotMessage = (messageStep: Step) => {
+  const addBotMessage = (messageStep: Step, currentFlow?: FlowType) => {
     setIsTyping(true);
 
     setTimeout(() => {
       setIsTyping(false);
-      const newMessage = createBotMessage(messageStep);
+      const newMessage = createBotMessage(messageStep, currentFlow);
       if (newMessage) {
         setMessages((prev) => [...prev, newMessage]);
       }
     }, 800);
   };
 
-  const createBotMessage = (messageStep: Step): Message | null => {
+  const createBotMessage = (messageStep: Step, currentFlow?: FlowType): Message | null => {
     const id = Date.now().toString();
+    // Use passed flow or fall back to state (for steps that don't need it)
+    const activeFlow = currentFlow ?? flow;
 
     switch (messageStep) {
       case "welcome":
@@ -143,35 +146,35 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
           id,
           type: "bot",
           content:
-            flow === "buy"
+            activeFlow === "buy"
               ? t("buy.propertyType.question")
               : t("sell.propertyType.question"),
           options: [
             {
               value: "singleFamily",
               label:
-                flow === "buy"
+                activeFlow === "buy"
                   ? t("buy.propertyType.options.singleFamily")
                   : t("sell.propertyType.options.singleFamily"),
             },
             {
               value: "condo",
               label:
-                flow === "buy"
+                activeFlow === "buy"
                   ? t("buy.propertyType.options.condo")
                   : t("sell.propertyType.options.condo"),
             },
             {
               value: "multiFamily",
               label:
-                flow === "buy"
+                activeFlow === "buy"
                   ? t("buy.propertyType.options.multiFamily")
                   : t("sell.propertyType.options.multiFamily"),
             },
             {
               value: "land",
               label:
-                flow === "buy"
+                activeFlow === "buy"
                   ? t("buy.propertyType.options.land")
                   : t("sell.propertyType.options.land"),
             },
@@ -219,11 +222,11 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
           id,
           type: "bot",
           content:
-            flow === "buy"
+            activeFlow === "buy"
               ? t("buy.timeline.question")
               : t("sell.timeline.question"),
           options:
-            flow === "buy"
+            activeFlow === "buy"
               ? [
                   { value: "asap", label: t("buy.timeline.options.asap") },
                   {
@@ -313,12 +316,15 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
   const handleOptionSelect = (value: string, label: string) => {
     addUserMessage(label);
 
+    // Track step progression
+    trackWizardStep({ step, flow, value });
+
     if (step === "welcome") {
       const selectedFlow = value as FlowType;
       setFlow(selectedFlow);
       setFormData((prev) => ({ ...prev, flow: value }));
       setStep("propertyType");
-      setTimeout(() => addBotMessage("propertyType"), 300);
+      setTimeout(() => addBotMessage("propertyType", selectedFlow), 300);
     } else if (step === "propertyType") {
       setFormData((prev) => ({ ...prev, propertyType: value }));
       if (flow === "buy") {
@@ -381,6 +387,9 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
     addUserMessage(value);
     setInputValue("");
 
+    // Track step progression for input steps
+    trackWizardStep({ step, flow });
+
     if (step === "address") {
       setFormData((prev) => ({ ...prev, address: value }));
       setStep("reason");
@@ -434,6 +443,7 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
       if (response.ok) {
         clearSession();
         setStep("success");
+        trackLeadGeneration({ lead_source: "chat_wizard", flow: data.flow as "buy" | "sell" | null });
       } else {
         const responseData = await response.json();
         // Handle server-side validation errors
@@ -472,8 +482,15 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
 
   const currentInput = getCurrentInput();
 
+  const handleClose = () => {
+    if (step !== "success") {
+      trackWizardClose({ step, flow });
+    }
+    onClose();
+  };
+
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
+    <Sheet open={isOpen} onOpenChange={handleClose}>
       <SheetContent
         side="right"
         className="w-full sm:max-w-lg p-0 bg-white flex flex-col"
@@ -487,7 +504,7 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
             <Button
               variant="ghost"
               size="icon"
-              onClick={onClose}
+              onClick={handleClose}
               className="h-8 w-8"
             >
               <X className="h-4 w-4" />

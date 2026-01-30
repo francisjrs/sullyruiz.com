@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { getSessionId, setCTASource, clearSession } from "@/lib/session";
 import { validateEmail, validateName } from "@/lib/validation";
 import { useToast } from "@/components/toast-provider";
+import { trackGuideToggle, trackLeadGeneration } from "@/lib/analytics";
 
 export function LeadMagnet() {
   const t = useTranslations("leadMagnet");
@@ -114,6 +115,11 @@ export function LeadMagnet() {
         setFirstName("");
         setEmail("");
         setErrors({});
+        trackLeadGeneration({ lead_source: "lead_magnet", guide_type: guideType });
+        toast({
+          title: t("success"),
+          variant: "success",
+        });
       } else {
         const data = await response.json();
         // Handle server-side validation errors
@@ -169,7 +175,10 @@ export function LeadMagnet() {
               <div className="flex border border-[#BEB09E]/30 mb-6 max-w-xs">
                 <button
                   type="button"
-                  onClick={() => setGuideType("buyer")}
+                  onClick={() => {
+                    setGuideType("buyer");
+                    trackGuideToggle({ guide_type: "buyer" });
+                  }}
                   className={`flex-1 py-3 px-4 font-sans text-xs uppercase tracking-wider transition-all duration-300 ${
                     guideType === "buyer"
                       ? "bg-[#BEB09E] text-white"
@@ -180,7 +189,10 @@ export function LeadMagnet() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setGuideType("seller")}
+                  onClick={() => {
+                    setGuideType("seller");
+                    trackGuideToggle({ guide_type: "seller" });
+                  }}
                   className={`flex-1 py-3 px-4 font-sans text-xs uppercase tracking-wider transition-all duration-300 ${
                     guideType === "seller"
                       ? "bg-[#BEB09E] text-white"

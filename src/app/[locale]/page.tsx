@@ -13,6 +13,7 @@ import { FAQ } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { ChatWizard } from "@/components/chat-wizard";
 import { setCTASource, type CTASource } from "@/lib/session";
+import { trackCTAClick, trackWizardOpen } from "@/lib/analytics";
 
 type FlowType = "buy" | "sell" | null;
 
@@ -26,6 +27,8 @@ export default function Home() {
     setCTASource(ctaSource);
     setInitialFlow(flow);
     setIsChatOpen(true);
+    trackCTAClick({ cta_source: ctaSource, flow });
+    trackWizardOpen({ cta_source: ctaSource });
   };
 
   const closeChat = () => {
