@@ -31,6 +31,16 @@ export function validatePhone(phone: string): ValidationResult {
   return { valid: true };
 }
 
+export function validatePhoneRequired(phone: string): ValidationResult {
+  if (!phone || !phone.trim()) {
+    return { valid: false, error: "validation.phone.required" };
+  }
+  if (!US_PHONE_REGEX.test(phone.trim())) {
+    return { valid: false, error: "validation.phone.invalid" };
+  }
+  return { valid: true };
+}
+
 export function validateName(name: string): ValidationResult {
   if (!name || !name.trim()) {
     return { valid: false, error: "validation.name.required" };
@@ -60,7 +70,7 @@ export interface LeadValidationResult {
 
 export function validateLeadPayload(
   contact: LeadContact,
-  type: "lead_magnet" | "chat_wizard"
+  type: "lead_magnet" | "chat_wizard" | "consult"
 ): LeadValidationResult {
   const errors: Record<string, string> = {};
 
@@ -85,6 +95,18 @@ export function validateLeadPayload(
 
     // Validate phone (optional but must be valid format if provided)
     const phoneResult = validatePhone(contact.phone || "");
+    if (!phoneResult.valid && phoneResult.error) {
+      errors.phone = phoneResult.error;
+    }
+  } else if (type === "consult") {
+    // Validate name (required for consult)
+    const nameResult = validateName(contact.name || "");
+    if (!nameResult.valid && nameResult.error) {
+      errors.name = nameResult.error;
+    }
+
+    // Validate phone (required for consult - for WhatsApp contact)
+    const phoneResult = validatePhoneRequired(contact.phone || "");
     if (!phoneResult.valid && phoneResult.error) {
       errors.phone = phoneResult.error;
     }

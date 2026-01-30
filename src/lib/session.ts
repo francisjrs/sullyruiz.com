@@ -10,7 +10,8 @@ export type CTASource =
   | "about"
   | "services_buy"
   | "services_sell"
-  | "lead_magnet";
+  | "lead_magnet"
+  | "consult_form";
 
 /**
  * Get or create a session ID for lead tracking.
