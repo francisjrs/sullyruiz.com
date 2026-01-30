@@ -15,7 +15,8 @@ import {
 import { getSessionData, clearSession } from "@/lib/session";
 import { validateName, validatePhone, validateEmail } from "@/lib/validation";
 import { useToast } from "@/components/toast-provider";
-import { trackWizardStep, trackWizardClose, trackLeadGeneration } from "@/lib/analytics";
+import { trackWizardStep, trackWizardClose, trackLeadGeneration, trackFormError } from "@/lib/analytics";
+import { getUTMParams } from "@/lib/utm";
 
 type FlowType = "buy" | "sell" | null;
 type Step =
@@ -363,6 +364,11 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
       const result = validateName(value);
       if (!result.valid && result.error) {
         setFieldError(getErrorMessage(result.error));
+        trackFormError({
+          form_name: "chat_wizard",
+          error_field: "name",
+          error_type: result.error.includes("required") ? "required" : "invalid",
+        });
         return;
       }
     } else if (step === "contactPhone") {
@@ -371,6 +377,11 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
         const result = validatePhone(value);
         if (!result.valid && result.error) {
           setFieldError(getErrorMessage(result.error));
+          trackFormError({
+            form_name: "chat_wizard",
+            error_field: "phone",
+            error_type: "invalid",
+          });
           return;
         }
       }
@@ -378,6 +389,11 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
       const result = validateEmail(value);
       if (!result.valid && result.error) {
         setFieldError(getErrorMessage(result.error));
+        trackFormError({
+          form_name: "chat_wizard",
+          error_field: "email",
+          error_type: result.error.includes("required") ? "required" : "invalid",
+        });
         return;
       }
     }
@@ -414,6 +430,7 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
 
     try {
       const sessionData = getSessionData();
+      const utmParams = getUTMParams();
 
       const response = await fetch("/api/lead", {
         method: "POST",
@@ -437,6 +454,7 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
             email: data.email,
           },
           locale,
+          utm: utmParams,
         }),
       });
 

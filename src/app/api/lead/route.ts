@@ -10,6 +10,14 @@ type CTASource =
   | "services_sell"
   | "lead_magnet";
 
+interface UTMParams {
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  utm_term: string | null;
+  utm_content: string | null;
+}
+
 interface LeadMagnetPayload {
   type: "lead_magnet";
   guideType: "buyer" | "seller";
@@ -20,6 +28,7 @@ interface LeadMagnetPayload {
     email: string;
   };
   locale: string;
+  utm?: UTMParams;
 }
 
 interface ChatWizardPayload {
@@ -41,6 +50,7 @@ interface ChatWizardPayload {
     email: string;
   };
   locale: string;
+  utm?: UTMParams;
 }
 
 type LeadPayload = LeadMagnetPayload | ChatWizardPayload;

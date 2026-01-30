@@ -10,7 +10,8 @@ import { Label } from "@/components/ui/label";
 import { getSessionId, setCTASource, clearSession } from "@/lib/session";
 import { validateEmail, validateName } from "@/lib/validation";
 import { useToast } from "@/components/toast-provider";
-import { trackGuideToggle, trackLeadGeneration } from "@/lib/analytics";
+import { trackGuideToggle, trackLeadGeneration, trackFormError } from "@/lib/analytics";
+import { getUTMParams } from "@/lib/utm";
 
 export function LeadMagnet() {
   const t = useTranslations("leadMagnet");
@@ -39,11 +40,18 @@ export function LeadMagnet() {
     return tValidation("submitError");
   };
 
-  const validateField = (field: "firstName" | "email", value: string) => {
+  const validateField = (field: "firstName" | "email", value: string, trackError = false) => {
     if (field === "firstName") {
       const result = validateName(value);
       if (!result.valid && result.error) {
         setErrors((prev) => ({ ...prev, firstName: getErrorMessage(result.error!) }));
+        if (trackError) {
+          trackFormError({
+            form_name: "lead_magnet",
+            error_field: "firstName",
+            error_type: result.error.includes("required") ? "required" : "invalid",
+          });
+        }
       } else {
         setErrors((prev) => ({ ...prev, firstName: undefined }));
       }
@@ -51,6 +59,13 @@ export function LeadMagnet() {
       const result = validateEmail(value);
       if (!result.valid && result.error) {
         setErrors((prev) => ({ ...prev, email: getErrorMessage(result.error!) }));
+        if (trackError) {
+          trackFormError({
+            form_name: "lead_magnet",
+            error_field: "email",
+            error_type: result.error.includes("required") ? "required" : "invalid",
+          });
+        }
       } else {
         setErrors((prev) => ({ ...prev, email: undefined }));
       }
@@ -64,9 +79,19 @@ export function LeadMagnet() {
 
     if (!nameResult.valid && nameResult.error) {
       newErrors.firstName = getErrorMessage(nameResult.error);
+      trackFormError({
+        form_name: "lead_magnet",
+        error_field: "firstName",
+        error_type: nameResult.error.includes("required") ? "required" : "invalid",
+      });
     }
     if (!emailResult.valid && emailResult.error) {
       newErrors.email = getErrorMessage(emailResult.error);
+      trackFormError({
+        form_name: "lead_magnet",
+        error_field: "email",
+        error_type: emailResult.error.includes("required") ? "required" : "invalid",
+      });
     }
 
     setErrors(newErrors);
@@ -95,6 +120,7 @@ export function LeadMagnet() {
       // Set CTA source for lead magnet
       setCTASource("lead_magnet");
       const sessionId = getSessionId();
+      const utmParams = getUTMParams();
 
       const response = await fetch("/api/lead", {
         method: "POST",
@@ -106,6 +132,7 @@ export function LeadMagnet() {
           cta_source: "lead_magnet",
           contact: { firstName, email },
           locale,
+          utm: utmParams,
         }),
       });
 
