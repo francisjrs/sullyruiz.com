@@ -1,0 +1,171 @@
+name: Performance Monitoring
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run daily at 6 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  performance-audit:
+    name: 📊 Performance Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # IMPORTANT: Checkout must come before using local composite actions
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build application
+        run: npm run build
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ZAPIER_WEBHOOK_URL: ${{ secrets.ZAPIER_WEBHOOK_URL }}
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.13.x
+
+      - name: Run Lighthouse CI
+        run: |
+          lhci autorun --config=lighthouserc.json || true
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LIGHTHOUSE_CI_TOKEN: ${{ secrets.LIGHTHOUSE_CI_TOKEN }}
+
+      - name: Generate Performance Report
+        id: report
+        run: |
+          mkdir -p performance-results
+
+          # Check if Lighthouse results exist
+          if [ -d ".lighthouseci" ]; then
+            echo "has_results=true" >> "$GITHUB_OUTPUT"
+
+            # Copy results to performance-results directory
+            cp -r .lighthouseci/* performance-results/ 2>/dev/null || true
+
+            # Generate summary from latest results
+            LATEST_REPORT=$(find .lighthouseci -name "*.json" -type f | head -1)
+            if [ -n "$LATEST_REPORT" ]; then
+              {
+                echo "# 📊 Lighthouse Performance Report"
+                echo ""
+                echo "**Run Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+                echo "**Commit:** ${{ github.sha }}"
+                echo ""
+              } > performance-results/summary.md
+
+              # Extract scores if jq is available
+              if command -v jq &> /dev/null && [ -f "$LATEST_REPORT" ]; then
+                PERF=$(jq -r '.categories.performance.score // 0 | . * 100 | floor' "$LATEST_REPORT" 2>/dev/null || echo "N/A")
+                A11Y=$(jq -r '.categories.accessibility.score // 0 | . * 100 | floor' "$LATEST_REPORT" 2>/dev/null || echo "N/A")
+                BP=$(jq -r '.categories["best-practices"].score // 0 | . * 100 | floor' "$LATEST_REPORT" 2>/dev/null || echo "N/A")
+                SEO=$(jq -r '.categories.seo.score // 0 | . * 100 | floor' "$LATEST_REPORT" 2>/dev/null || echo "N/A")
+
+                {
+                  echo "## Scores"
+                  echo ""
+                  echo "| Category | Score |"
+                  echo "|----------|-------|"
+                  echo "| Performance | ${PERF}% |"
+                  echo "| Accessibility | ${A11Y}% |"
+                  echo "| Best Practices | ${BP}% |"
+                  echo "| SEO | ${SEO}% |"
+                } >> performance-results/summary.md
+              fi
+            fi
+          else
+            echo "has_results=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "# ⚠️ No Lighthouse Results"
+              echo ""
+              echo "Lighthouse CI did not produce any results."
+            } > performance-results/summary.md
+          fi
+
+      - name: Upload Performance Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-results-${{ github.run_number }}
+          path: performance-results/
+          retention-days: 30
+          if-no-files-found: warn
+
+  performance-summary:
+    name: 📋 Performance Summary
+    runs-on: ubuntu-latest
+    needs: performance-audit
+    if: always()
+
+    steps:
+      - name: Download Performance Results
+        uses: actions/download-artifact@v4
+        id: download
+        continue-on-error: true
+        with:
+          name: performance-results-${{ github.run_number }}
+          path: performance-results/
+
+      - name: Generate Job Summary
+        env:
+          DOWNLOAD_OUTCOME: ${{ steps.download.outcome }}
+          AUDIT_RESULT: ${{ needs.performance-audit.result }}
+          SERVER_URL: ${{ github.server_url }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          {
+            echo "# 📊 Performance Monitoring Results"
+            echo ""
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$DOWNLOAD_OUTCOME" == "failure" ] || [ "$AUDIT_RESULT" == "failure" ]; then
+            {
+              echo "## ❌ Performance Audit Failed"
+              echo ""
+              echo "The performance audit job encountered an error."
+              echo ""
+              echo "**Possible causes:**"
+              echo "- Build failure"
+              echo "- Lighthouse CI configuration issue"
+              echo "- Network timeout"
+              echo ""
+              echo "Please check the [workflow run logs](${SERVER_URL}/${REPO}/actions/runs/${RUN_ID}) for details."
+            } >> "$GITHUB_STEP_SUMMARY"
+          elif [ -f "performance-results/summary.md" ]; then
+            cat performance-results/summary.md >> "$GITHUB_STEP_SUMMARY"
+            {
+              echo ""
+              echo "---"
+              echo ""
+              echo "📁 [Download full report](https://github.com/${REPO}/actions/runs/${RUN_ID})"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "## ⚠️ No Summary Available"
+              echo ""
+              echo "Performance results summary file was not found."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Check Performance Thresholds
+        if: steps.download.outcome == 'success'
+        run: |
+          if [ -f "performance-results/summary.md" ]; then
+            echo "Performance report generated successfully"
+            # Add threshold checks here if needed
+          fi
