@@ -3,9 +3,12 @@ import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/toast-provider";
 import "../globals.css";
+
+const GA_MEASUREMENT_ID = "G-8L75VSCCDF";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -62,6 +65,20 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className="scroll-smooth">
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </head>
       <body
         className={`${montserrat.variable} ${cormorant.variable} antialiased`}
       >
