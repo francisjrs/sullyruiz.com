@@ -323,6 +323,7 @@
       "invalid": "Please enter a valid email address"
     },
     "phone": {
+      "required": "Phone number is required",
       "invalid": "Please enter a valid US phone number"
     },
     "name": {
@@ -332,6 +333,193 @@
     "submitError": "Something went wrong. Please try again.",
     "networkError": "Unable to connect. Please check your internet and try again.",
     "retry": "Try Again"
+  },
+  "consult": {
+    "metadata": {
+      "title": "Free Homebuyer Consultation | Sully Ruiz",
+      "description": "Bank said no? Get a free consultation to explore your path to homeownership. ITIN, self-employed, and non-traditional income welcome."
+    },
+    "hero": {
+      "tagline": "Free Consultation",
+      "headline": "The Bank Said No. I Say Let's Talk.",
+      "headlineHighlight": "I Say Let's Talk.",
+      "subheadline": "Self-employed? ITIN? Non-traditional income? There are more paths to homeownership than banks will tell you.",
+      "cta": "Schedule Your Free Consultation",
+      "video": {
+        "muteLabel": "Click to unmute",
+        "unmuteLabel": "Click to mute",
+        "playLabel": "Play video"
+      }
+    },
+    "stories": {
+      "title": "Stories Like Yours",
+      "subtitle": "Real families who were told 'no' but found a way home.",
+      "items": {
+        "story1": {
+          "quote": "I was denied twice because of my ITIN. Sully connected me with a lender who understood my situation. Now I'm a homeowner in Round Rock.",
+          "name": "Maria G.",
+          "situation": "ITIN buyer, denied by 2 banks"
+        },
+        "story2": {
+          "quote": "As a self-employed contractor, banks didn't trust my income. Sully found me a program that looked at my actual bank statements instead.",
+          "name": "Carlos R.",
+          "situation": "1099 contractor, Austin"
+        },
+        "story3": {
+          "quote": "They told me to wait 2 more years. Sully showed me a down payment assistance program I qualified for today.",
+          "name": "Jennifer L.",
+          "situation": "First-time buyer, limited credit history"
+        }
+      },
+      "disclaimer": "Individual experiences presented here may not be typical. Results vary based on individual circumstances."
+    },
+    "problem": {
+      "title": "Why Banks Say No",
+      "subtitle": "Traditional lenders have rigid requirements that don't fit everyone's situation.",
+      "reasons": {
+        "reason1": "No traditional W-2 employment history",
+        "reason2": "Self-employed or 1099 income",
+        "reason3": "ITIN instead of SSN",
+        "reason4": "Limited or no credit history",
+        "reason5": "Recent job change or career switch",
+        "reason6": "Non-traditional income sources"
+      }
+    },
+    "solution": {
+      "title": "What I Actually Do",
+      "subtitle": "A real conversation about your situation and options—no pressure, no obligations.",
+      "benefits": {
+        "benefit1": "Review your complete financial picture",
+        "benefit2": "Identify programs you may qualify for",
+        "benefit3": "Connect you with the right lenders",
+        "benefit4": "Create a clear path forward",
+        "benefit5": "Answer all your questions honestly"
+      }
+    },
+    "deliverables": {
+      "title": "What You Get",
+      "subtitle": "From our free consultation",
+      "items": {
+        "item1": {
+          "title": "Honest Assessment",
+          "description": "A clear picture of where you stand and what's possible"
+        },
+        "item2": {
+          "title": "Program Options",
+          "description": "Down payment assistance and special programs you may qualify for"
+        },
+        "item3": {
+          "title": "Lender Connections",
+          "description": "Introductions to lenders who work with your situation"
+        },
+        "item4": {
+          "title": "Action Plan",
+          "description": "Specific next steps whether you're ready now or need time"
+        }
+      }
+    },
+    "form": {
+      "title": "Schedule Your Free Consultation",
+      "subtitle": "Tell me a bit about your situation so I can prepare for our conversation.",
+      "sections": {
+        "contact": "Contact Information",
+        "qualification": "Your Situation",
+        "tracking": "How Did You Find Me?"
+      },
+      "fields": {
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "email": "Email Address",
+        "languagePreference": "Preferred Language",
+        "timeline": "When are you looking to buy?",
+        "incomeType": "How do you earn income?",
+        "bankStatus": "Have you talked to a bank?",
+        "downPayment": "Down payment situation?",
+        "area": "What area are you interested in?",
+        "source": "How did you hear about me?",
+        "notes": "Anything else I should know?"
+      },
+      "options": {
+        "language": {
+          "es": "Español",
+          "en": "English"
+        },
+        "timeline": {
+          "0-3months": "Ready now (0-3 months)",
+          "3-6months": "Soon (3-6 months)",
+          "6-12months": "Planning ahead (6-12 months)",
+          "12plus": "12+ months out",
+          "exploring": "Just exploring options"
+        },
+        "incomeType": {
+          "w2": "W-2 Employee",
+          "1099": "1099 / Self-employed",
+          "itin": "ITIN",
+          "mixed": "Mixed income sources",
+          "other": "Other"
+        },
+        "bankStatus": {
+          "approved": "Pre-approved",
+          "denied": "Was denied",
+          "wait": "Told to wait",
+          "notYet": "Haven't talked to a bank yet"
+        },
+        "downPayment": {
+          "3percent": "Have 3%+ saved",
+          "some": "Have some savings",
+          "needDpa": "Need down payment assistance",
+          "none": "No savings yet"
+        },
+        "area": {
+          "austin": "Austin",
+          "roundRock": "Round Rock",
+          "pflugerville": "Pflugerville",
+          "georgetown": "Georgetown",
+          "hays": "Hays County (Kyle, Buda, San Marcos)",
+          "bastrop": "Bastrop",
+          "other": "Other area",
+          "flexible": "Flexible / Open to options"
+        },
+        "source": {
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "referral": "Friend or family referral",
+          "google": "Google search",
+          "other": "Other"
+        }
+      },
+      "placeholders": {
+        "name": "Your full name",
+        "phone": "(512) 555-1234",
+        "email": "you@email.com",
+        "notes": "Any details about your situation that would help me prepare..."
+      },
+      "submit": "Request My Free Consultation",
+      "submitting": "Sending...",
+      "privacy": "Your information is confidential and will only be used to contact you about your consultation."
+    },
+    "success": {
+      "title": "Got It!",
+      "message": "I'll reach out within 24 hours to schedule your free consultation. Check your phone—I usually text first.",
+      "whatsapp": "Or message me directly on WhatsApp"
+    },
+    "footer": {
+      "tagline": "Everyone deserves a fair shot at homeownership.",
+      "contact": {
+        "title": "Contact",
+        "email": "realtor@sullyruiz.com",
+        "phone": "(512) 412-2352"
+      },
+      "compliance": {
+        "brokerage": "Keller Williams Austin NW",
+        "address": "9606 N Mopac Expy, Ste 950, Austin, TX 78759",
+        "license": "License #0742907",
+        "iabs": "TREC Information About Brokerage Services",
+        "consumerProtection": "TREC Consumer Protection Notice",
+        "equalHousing": "Equal Housing Opportunity"
+      },
+      "copyright": "© {year} Sully Ruiz Real Estate. All rights reserved."
+    }
   },
   "screening": {
     "header": {

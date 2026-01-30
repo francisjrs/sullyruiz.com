@@ -323,6 +323,7 @@
       "invalid": "Por favor ingresa un correo electrónico válido"
     },
     "phone": {
+      "required": "El número de teléfono es requerido",
       "invalid": "Por favor ingresa un número de teléfono válido"
     },
     "name": {
@@ -332,6 +333,193 @@
     "submitError": "Algo salió mal. Por favor intenta de nuevo.",
     "networkError": "No se puede conectar. Por favor verifica tu conexión.",
     "retry": "Intentar de Nuevo"
+  },
+  "consult": {
+    "metadata": {
+      "title": "Consulta Gratis para Compradores | Sully Ruiz",
+      "description": "¿El banco te dijo que no? Obtén una consulta gratis para explorar tu camino hacia la compra de casa. ITIN, autoempleados e ingresos no tradicionales bienvenidos."
+    },
+    "hero": {
+      "tagline": "Consulta Gratis",
+      "headline": "El Banco Dijo No. Yo Digo Hablemos.",
+      "headlineHighlight": "Yo Digo Hablemos.",
+      "subheadline": "¿Autoempleado? ¿ITIN? ¿Ingresos no tradicionales? Hay más caminos hacia tu casa propia de los que los bancos te cuentan.",
+      "cta": "Agenda Tu Consulta Gratis",
+      "video": {
+        "muteLabel": "Clic para activar sonido",
+        "unmuteLabel": "Clic para silenciar",
+        "playLabel": "Reproducir video"
+      }
+    },
+    "stories": {
+      "title": "Historias Como la Tuya",
+      "subtitle": "Familias reales a quienes les dijeron 'no' pero encontraron su camino a casa.",
+      "items": {
+        "story1": {
+          "quote": "Me negaron dos veces por mi ITIN. Sully me conectó con un prestamista que entendió mi situación. Ahora soy dueña de mi casa en Round Rock.",
+          "name": "Maria G.",
+          "situation": "Compradora con ITIN, negada por 2 bancos"
+        },
+        "story2": {
+          "quote": "Como contratista autoempleado, los bancos no confiaban en mis ingresos. Sully me encontró un programa que revisó mis estados de cuenta bancarios.",
+          "name": "Carlos R.",
+          "situation": "Contratista 1099, Austin"
+        },
+        "story3": {
+          "quote": "Me dijeron que esperara 2 años más. Sully me mostró un programa de asistencia para enganche para el que califico hoy.",
+          "name": "Jennifer L.",
+          "situation": "Primera compradora, historial crediticio limitado"
+        }
+      },
+      "disclaimer": "Las experiencias individuales presentadas aquí pueden no ser típicas. Los resultados varían según las circunstancias individuales."
+    },
+    "problem": {
+      "title": "Por Qué los Bancos Dicen No",
+      "subtitle": "Los prestamistas tradicionales tienen requisitos rígidos que no se adaptan a la situación de todos.",
+      "reasons": {
+        "reason1": "Sin historial de empleo W-2 tradicional",
+        "reason2": "Autoempleado o ingresos 1099",
+        "reason3": "ITIN en lugar de SSN",
+        "reason4": "Historial crediticio limitado o inexistente",
+        "reason5": "Cambio de trabajo o carrera reciente",
+        "reason6": "Fuentes de ingreso no tradicionales"
+      }
+    },
+    "solution": {
+      "title": "Lo Que Realmente Hago",
+      "subtitle": "Una conversación real sobre tu situación y opciones—sin presión, sin obligaciones.",
+      "benefits": {
+        "benefit1": "Revisar tu panorama financiero completo",
+        "benefit2": "Identificar programas para los que podrías calificar",
+        "benefit3": "Conectarte con los prestamistas correctos",
+        "benefit4": "Crear un camino claro hacia adelante",
+        "benefit5": "Responder todas tus preguntas honestamente"
+      }
+    },
+    "deliverables": {
+      "title": "Lo Que Recibes",
+      "subtitle": "De nuestra consulta gratuita",
+      "items": {
+        "item1": {
+          "title": "Evaluación Honesta",
+          "description": "Una imagen clara de dónde estás y qué es posible"
+        },
+        "item2": {
+          "title": "Opciones de Programas",
+          "description": "Asistencia para enganche y programas especiales para los que podrías calificar"
+        },
+        "item3": {
+          "title": "Conexiones con Prestamistas",
+          "description": "Presentaciones a prestamistas que trabajan con tu situación"
+        },
+        "item4": {
+          "title": "Plan de Acción",
+          "description": "Pasos específicos si estás listo ahora o necesitas tiempo"
+        }
+      }
+    },
+    "form": {
+      "title": "Agenda Tu Consulta Gratis",
+      "subtitle": "Cuéntame un poco sobre tu situación para que pueda prepararme para nuestra conversación.",
+      "sections": {
+        "contact": "Información de Contacto",
+        "qualification": "Tu Situación",
+        "tracking": "¿Cómo Me Encontraste?"
+      },
+      "fields": {
+        "name": "Nombre Completo",
+        "phone": "Número de Teléfono",
+        "email": "Correo Electrónico",
+        "languagePreference": "Idioma Preferido",
+        "timeline": "¿Cuándo buscas comprar?",
+        "incomeType": "¿Cómo generas ingresos?",
+        "bankStatus": "¿Has hablado con un banco?",
+        "downPayment": "¿Situación de enganche?",
+        "area": "¿Qué área te interesa?",
+        "source": "¿Cómo supiste de mí?",
+        "notes": "¿Algo más que deba saber?"
+      },
+      "options": {
+        "language": {
+          "es": "Español",
+          "en": "English"
+        },
+        "timeline": {
+          "0-3months": "Listo ahora (0-3 meses)",
+          "3-6months": "Pronto (3-6 meses)",
+          "6-12months": "Planeando (6-12 meses)",
+          "12plus": "Más de 12 meses",
+          "exploring": "Solo explorando opciones"
+        },
+        "incomeType": {
+          "w2": "Empleado W-2",
+          "1099": "1099 / Autoempleado",
+          "itin": "ITIN",
+          "mixed": "Ingresos mixtos",
+          "other": "Otro"
+        },
+        "bankStatus": {
+          "approved": "Pre-aprobado",
+          "denied": "Me negaron",
+          "wait": "Me dijeron que espere",
+          "notYet": "Aún no he hablado con un banco"
+        },
+        "downPayment": {
+          "3percent": "Tengo 3%+ ahorrado",
+          "some": "Tengo algunos ahorros",
+          "needDpa": "Necesito asistencia para enganche",
+          "none": "Sin ahorros aún"
+        },
+        "area": {
+          "austin": "Austin",
+          "roundRock": "Round Rock",
+          "pflugerville": "Pflugerville",
+          "georgetown": "Georgetown",
+          "hays": "Condado de Hays (Kyle, Buda, San Marcos)",
+          "bastrop": "Bastrop",
+          "other": "Otra área",
+          "flexible": "Flexible / Abierto a opciones"
+        },
+        "source": {
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "referral": "Referido de amigo o familiar",
+          "google": "Búsqueda en Google",
+          "other": "Otro"
+        }
+      },
+      "placeholders": {
+        "name": "Tu nombre completo",
+        "phone": "(512) 555-1234",
+        "email": "tu@correo.com",
+        "notes": "Cualquier detalle sobre tu situación que me ayude a prepararme..."
+      },
+      "submit": "Solicitar Mi Consulta Gratis",
+      "submitting": "Enviando...",
+      "privacy": "Tu información es confidencial y solo se usará para contactarte sobre tu consulta."
+    },
+    "success": {
+      "title": "¡Recibido!",
+      "message": "Me comunicaré dentro de 24 horas para programar tu consulta gratis. Revisa tu teléfono—usualmente envío mensaje de texto primero.",
+      "whatsapp": "O escríbeme directamente por WhatsApp"
+    },
+    "footer": {
+      "tagline": "Todos merecen una oportunidad justa de tener casa propia.",
+      "contact": {
+        "title": "Contacto",
+        "email": "realtor@sullyruiz.com",
+        "phone": "(512) 412-2352"
+      },
+      "compliance": {
+        "brokerage": "Keller Williams Austin NW",
+        "address": "9606 N Mopac Expy, Ste 950, Austin, TX 78759",
+        "license": "Licencia #0742907",
+        "iabs": "Información de TREC Sobre Servicios de Corretaje",
+        "consumerProtection": "Aviso de Protección al Consumidor de TREC",
+        "equalHousing": "Igualdad de Oportunidades en Vivienda"
+      },
+      "copyright": "© {year} Sully Ruiz Bienes Raíces. Todos los derechos reservados."
+    }
   },
   "screening": {
     "header": {
