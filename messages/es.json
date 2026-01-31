@@ -332,6 +332,8 @@
     },
     "submitError": "Algo salió mal. Por favor intenta de nuevo.",
     "networkError": "No se puede conectar. Por favor verifica tu conexión.",
+    "storageError": "No se pudo guardar tu información. Por favor intenta de nuevo.",
+    "timeoutError": "La solicitud tardó demasiado. Por favor intenta de nuevo.",
     "retry": "Intentar de Nuevo"
   },
   "consult": {
@@ -501,7 +503,10 @@
     "success": {
       "title": "¡Recibido!",
       "message": "Me comunicaré dentro de 24 horas para programar tu consulta gratis. Revisa tu teléfono—usualmente envío mensaje de texto primero.",
-      "whatsapp": "O escríbeme directamente por WhatsApp"
+      "whatsapp": "O escríbeme directamente por WhatsApp",
+      "emailSent": "Correo enviado",
+      "whatsappSent": "WhatsApp enviado",
+      "nextStepsTitle": "Próximos Pasos"
     },
     "footer": {
       "tagline": "Todos merecen una oportunidad justa de tener casa propia.",

@@ -47,6 +47,33 @@ interface FormErrors {
   source?: string;
 }
 
+interface N8nSuccessResponse {
+  success: true;
+  leadId: string;
+  notifications: {
+    emailSent: boolean;
+    whatsappSent: boolean;
+    agentNotified: boolean;
+  };
+  message: {
+    en: string;
+    es: string;
+  };
+  nextSteps: {
+    en: string[];
+    es: string[];
+  };
+}
+
+interface N8nErrorResponse {
+  success: false;
+  error: string;
+  message: string;
+  code: string;
+}
+
+type N8nResponse = N8nSuccessResponse | N8nErrorResponse;
+
 export function ConsultForm() {
   const t = useTranslations("consult.form");
   const tSuccess = useTranslations("consult.success");
@@ -72,6 +99,7 @@ export function ConsultForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [successResponse, setSuccessResponse] = useState<N8nSuccessResponse | null>(null);
 
   const getErrorMessage = (errorKey: string): string => {
     const parts = errorKey.split(".");
@@ -193,23 +221,42 @@ export function ConsultForm() {
         body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
+      const data: N8nResponse = await response.json();
+
+      if (response.ok && data.success) {
         clearSession();
+        setSuccessResponse(data as N8nSuccessResponse);
         setIsSuccess(true);
         toast({
           title: tSuccess("title"),
           description: tSuccess("message"),
           variant: "success",
         });
+      } else if (!data.success) {
+        // Handle n8n error response
+        const errorData = data as N8nErrorResponse;
+        let errorMessage = tValidation("submitError");
+
+        if (errorData.code === "TIMEOUT_ERROR") {
+          errorMessage = tValidation("timeoutError");
+        } else if (errorData.code === "STORAGE_ERROR") {
+          errorMessage = tValidation("storageError");
+        } else if (errorData.code === "NETWORK_ERROR") {
+          errorMessage = tValidation("networkError");
+        }
+
+        toast({
+          title: errorMessage,
+          variant: "error",
+        });
       } else {
-        const data = await response.json();
-        if (data.details) {
+        // Handle validation errors from API
+        const errorData = data as { details?: Record<string, string> };
+        if (errorData.details) {
           const serverErrors: FormErrors = {};
-          Object.entries(data.details).forEach(([key, value]) => {
+          Object.entries(errorData.details).forEach(([key, value]) => {
             if (key in formData) {
-              serverErrors[key as keyof FormErrors] = getErrorMessage(
-                value as string
-              );
+              serverErrors[key as keyof FormErrors] = getErrorMessage(value);
             }
           });
           setErrors(serverErrors);
@@ -238,6 +285,11 @@ export function ConsultForm() {
   };
 
   if (isSuccess) {
+    const currentLocale = locale as "en" | "es";
+    const message = successResponse?.message?.[currentLocale] || tSuccess("message");
+    const nextSteps = successResponse?.nextSteps?.[currentLocale] || [];
+    const notifications = successResponse?.notifications;
+
     return (
       <section ref={ref} id="form" className="section-padding bg-white">
         <div className="container mx-auto px-6 md:px-12">
@@ -252,9 +304,45 @@ export function ConsultForm() {
             <h2 className="heading-lg text-2xl md:text-3xl mb-4">
               {tSuccess("title")}
             </h2>
-            <p className="body-lg text-muted-foreground mb-8">
-              {tSuccess("message")}
+            <p className="body-lg text-muted-foreground mb-6">
+              {message}
             </p>
+
+            {/* Notification status indicators */}
+            {notifications && (
+              <div className="flex flex-wrap justify-center gap-3 mb-6">
+                {notifications.emailSent && (
+                  <span className="inline-flex items-center gap-1.5 text-sm text-green-700 bg-green-50 px-3 py-1 rounded-full">
+                    <Check className="w-3.5 h-3.5" />
+                    {tSuccess("emailSent")}
+                  </span>
+                )}
+                {notifications.whatsappSent && (
+                  <span className="inline-flex items-center gap-1.5 text-sm text-green-700 bg-green-50 px-3 py-1 rounded-full">
+                    <Check className="w-3.5 h-3.5" />
+                    {tSuccess("whatsappSent")}
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Next steps */}
+            {nextSteps.length > 0 && (
+              <div className="text-left bg-[#BEB09E]/5 rounded-lg p-6 mb-8">
+                <h3 className="font-sans text-xs uppercase tracking-[0.3em] text-[#BEB09E] mb-4">
+                  {tSuccess("nextStepsTitle")}
+                </h3>
+                <ul className="space-y-2">
+                  {nextSteps.map((step, index) => (
+                    <li key={index} className="flex items-start gap-2 text-muted-foreground">
+                      <span className="text-[#BEB09E] font-medium">{index + 1}.</span>
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <a
               href="https://wa.me/15124122352"
               target="_blank"

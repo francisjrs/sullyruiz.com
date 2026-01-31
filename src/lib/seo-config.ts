@@ -87,6 +87,7 @@ export function getOgLocale(locale: string): string {
 export const publicPages = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
   { path: "/screening", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/consulta", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/data-deletion", priority: 0.3, changeFrequency: "yearly" as const },

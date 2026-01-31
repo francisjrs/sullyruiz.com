@@ -332,6 +332,8 @@
     },
     "submitError": "Something went wrong. Please try again.",
     "networkError": "Unable to connect. Please check your internet and try again.",
+    "storageError": "Unable to save your information. Please try again.",
+    "timeoutError": "Request timed out. Please try again.",
     "retry": "Try Again"
   },
   "consult": {
@@ -501,7 +503,10 @@
     "success": {
       "title": "Got It!",
       "message": "I'll reach out within 24 hours to schedule your free consultation. Check your phone—I usually text first.",
-      "whatsapp": "Or message me directly on WhatsApp"
+      "whatsapp": "Or message me directly on WhatsApp",
+      "emailSent": "Email sent",
+      "whatsappSent": "WhatsApp sent",
+      "nextStepsTitle": "Next Steps"
     },
     "footer": {
       "tagline": "Everyone deserves a fair shot at homeownership.",

@@ -58,6 +58,21 @@ Push to `main` triggers GitHub Actions:
 
 Health check: `curl https://sullyruiz.com/api/health`
 
+## VPS Access
+
+```bash
+ssh -i ~/.ssh/github_deploy root@31.220.22.215
+```
+
+App directory: `/opt/sullyruiz/`
+
+Useful commands:
+```bash
+cd /opt/sullyruiz && docker compose logs --tail=50   # View logs
+cd /opt/sullyruiz && docker compose down && docker compose up -d   # Restart
+cat /opt/sullyruiz/.env   # View environment variables
+```
+
 ## Environment Variables
 
 - `N8N_WEBHOOK_URL` - Webhook URL for lead capture (configured on VPS at /opt/sullyruiz/.env)
