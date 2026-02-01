@@ -1,13 +1,23 @@
-# Gemini Image Generation API Reference
+# Gemini Image Generation API
 
 Local documentation for using Google's Gemini image generation capabilities in the Instagram automation workflow.
+
+---
+
+## Overview
+
+This document covers the Gemini API integration for generating AI images for Instagram content automation.
+
+---
 
 ## Models
 
 | Model | ID | Best For | Cost/Image |
 |-------|-----|----------|------------|
-| Flash | `gemini-2.0-flash-preview-image-generation` | Speed, high volume | ~$0.039 |
+| Flash | `gemini-2.5-flash-image` | Speed, high volume | ~$0.039 |
 | **Pro** | `gemini-3-pro-image-preview` | Quality, reference images | ~$0.06 |
+
+---
 
 ## API Endpoint
 
@@ -20,6 +30,8 @@ POST https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateCon
 Content-Type: application/json
 x-goog-api-key: {API_KEY}
 ```
+
+---
 
 ## Request Body Structure
 
@@ -66,6 +78,8 @@ x-goog-api-key: {API_KEY}
 }
 ```
 
+---
+
 ## Reference Image Limits
 
 | Image Type | Max Count | Use Case |
@@ -73,6 +87,8 @@ x-goog-api-key: {API_KEY}
 | **Human references** | 5 | Character consistency across posts |
 | **Object references** | 6 | Brand assets, logos, property photos |
 | **Total combined** | 14 | Complex scenes with people and objects |
+
+---
 
 ## Response Structure
 
@@ -93,6 +109,8 @@ x-goog-api-key: {API_KEY}
   }]
 }
 ```
+
+---
 
 ## Best Practices
 
@@ -124,6 +142,8 @@ x-goog-api-key: {API_KEY}
 | **Batch API** | Use for bulk generation (24hr turnaround, lower cost) |
 | **Error handling** | Implement retry with exponential backoff |
 | **Rate limiting** | Max 10 requests/minute for Pro model |
+
+---
 
 ## n8n Integration
 
@@ -158,6 +178,8 @@ if (imagePart) {
 throw new Error('No image generated in response');
 ```
 
+---
+
 ## Error Handling
 
 | Error Code | Meaning | Solution |
@@ -167,12 +189,16 @@ throw new Error('No image generated in response');
 | 500 | Server error | Retry with exponential backoff |
 | SAFETY | Content policy | Revise prompt, avoid restricted content |
 
+---
+
 ## Cost Estimation
 
 | Scenario | Model | Daily (4 posts) | Monthly |
 |----------|-------|-----------------|---------|
 | No portraits | Flash | $0.16 | $4.68 |
 | All portraits | Pro | $0.24 | $7.20 |
+
+---
 
 ## Portrait Archive URLs
 
@@ -187,8 +213,60 @@ Example:
 
 > **Note**: Portraits are stored at `/local-files/portraits/` on the VPS and served via the nginx-files container through Traefik.
 
+---
+
+## Aspect Ratios
+
+| Platform | Aspect Ratio | Resolution |
+|----------|--------------|------------|
+| Instagram Feed | 1:1 | 1080x1080 |
+| Instagram Stories | 9:16 | 1080x1920 |
+| Instagram Portrait | 4:5 | 1080x1350 |
+| Instagram Landscape | 1.91:1 | 1080x566 |
+
+---
+
+## Example Prompts
+
+### Professional Headshot Style
+
+```
+Create a professional real estate agent headshot of a Hispanic woman in her 30s.
+She is wearing a navy blazer over a white blouse, with subtle gold jewelry.
+The background is a soft gradient from light gray to white.
+Shot with an 85mm lens, soft studio lighting, warm and approachable expression.
+```
+
+### Property Tour Style
+
+```
+A friendly Hispanic real estate agent showing a young couple around a spacious,
+modern kitchen with white cabinets and stainless steel appliances.
+Natural lighting streams through large windows.
+Shot with a 24mm wide-angle lens, the mood is warm and inviting.
+The couple looks excited and engaged as the agent gestures toward the island counter.
+```
+
+### Market Update Style
+
+```
+A professional Hispanic real estate agent in business casual attire stands
+next to a modern display showing market statistics and home prices.
+Clean, modern office setting with Austin skyline visible through windows.
+The agent has a confident, knowledgeable expression.
+Shot with a 35mm lens, professional lighting.
+```
+
+---
+
 ## Related Resources
 
 - [Google AI Studio](https://aistudio.google.com/) - Test prompts interactively
 - [Gemini API Docs](https://ai.google.dev/gemini-api/docs/image-generation) - Official documentation
 - n8n workflow ID: `E6ZRlJpDJ64XtDst`
+
+---
+
+## Related Documentation
+
+- [n8n Overview](./n8n-overview.md) - Automation architecture
