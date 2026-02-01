@@ -7,6 +7,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { routing } from "@/i18n/routing";
 import { ToastProvider } from "@/components/toast-provider";
 import { StructuredData } from "@/components/structured-data";
+import { MetaPixel } from "@/components/meta-pixel";
 import {
   siteConfig,
   getCanonicalUrl,
@@ -127,6 +128,7 @@ export default async function LocaleLayout({
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
         {/* Preload hero image for LCP optimization */}
         <link
           rel="preload"
@@ -146,6 +148,7 @@ export default async function LocaleLayout({
       {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
       )}
+      <MetaPixel />
     </html>
   );
 }

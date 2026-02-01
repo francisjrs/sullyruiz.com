@@ -2,14 +2,26 @@
 
 import { sendGAEvent } from "@next/third-parties/google";
 import { getUTMParams } from "./utm";
+import {
+  generateEventId,
+  storeEventId,
+  trackMetaLead,
+  trackMetaViewContent,
+  trackMetaContact,
+} from "./meta-pixel";
 
 // GA4 Recommended Event: generate_lead
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events#generate_lead
+// Also tracks Meta Pixel Lead event with deduplication
 export function trackLeadGeneration(params: {
   lead_source: "chat_wizard" | "lead_magnet";
   flow?: "buy" | "sell" | null;
   guide_type?: "buyer" | "seller";
-}) {
+  eventId?: string;
+}): string {
+  // Generate event ID for deduplication if not provided
+  const eventId = params.eventId ?? generateEventId();
+
   sendGAEvent("event", "generate_lead", {
     currency: "USD",
     value: 1,
@@ -17,6 +29,19 @@ export function trackLeadGeneration(params: {
     ...(params.flow && { flow: params.flow }),
     ...(params.guide_type && { guide_type: params.guide_type }),
   });
+
+  // Track Meta Pixel Lead event
+  trackMetaLead({
+    eventId,
+    value: 1,
+    currency: "USD",
+    contentName: params.lead_source,
+  });
+
+  // Store event ID for CAPI deduplication
+  storeEventId("Lead", eventId);
+
+  return eventId;
 }
 
 // Track CTA button clicks
@@ -31,10 +56,22 @@ export function trackCTAClick(params: {
 }
 
 // Track wizard modal open
-export function trackWizardOpen(params: { cta_source: string }) {
+// Also tracks Meta Pixel ViewContent event
+export function trackWizardOpen(params: { cta_source: string }): string {
+  const eventId = generateEventId();
+
   sendGAEvent("event", "wizard_opened", {
     cta_source: params.cta_source,
   });
+
+  // Track Meta Pixel ViewContent event
+  trackMetaViewContent({
+    eventId,
+    contentName: "chat_wizard",
+    contentCategory: params.cta_source,
+  });
+
+  return eventId;
 }
 
 // Track wizard modal close
@@ -63,6 +100,32 @@ export function trackGuideToggle(params: { guide_type: "buyer" | "seller" }) {
   sendGAEvent("event", "guide_type_selected", {
     guide_type: params.guide_type,
   });
+}
+
+// Track consult form submission (high-intent lead)
+// Uses Meta Contact event instead of Lead for higher value
+export function trackConsultSubmission(params: {
+  eventId?: string;
+}): string {
+  const eventId = params.eventId ?? generateEventId();
+
+  sendGAEvent("event", "generate_lead", {
+    currency: "USD",
+    value: 5,
+    lead_source: "consult_form",
+  });
+
+  // Track Meta Pixel Contact event (higher intent than Lead)
+  trackMetaContact({
+    eventId,
+    value: 5,
+    currency: "USD",
+  });
+
+  // Store event ID for CAPI deduplication
+  storeEventId("Contact", eventId);
+
+  return eventId;
 }
 
 // Track form validation errors

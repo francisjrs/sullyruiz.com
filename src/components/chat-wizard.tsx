@@ -16,6 +16,7 @@ import { getSessionData, clearSession } from "@/lib/session";
 import { validateName, validatePhone, validateEmail } from "@/lib/validation";
 import { useToast } from "@/components/toast-provider";
 import { trackWizardStep, trackWizardClose, trackLeadGeneration, trackFormError } from "@/lib/analytics";
+import { generateEventId } from "@/lib/meta-pixel";
 import { getUTMParams } from "@/lib/utm";
 
 type FlowType = "buy" | "sell" | null;
@@ -428,6 +429,9 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
   const submitLead = async (data: typeof formData) => {
     setIsSubmitting(true);
 
+    // Generate event ID for Meta deduplication
+    const eventId = generateEventId();
+
     try {
       const sessionData = getSessionData();
       const utmParams = getUTMParams();
@@ -455,13 +459,14 @@ export function ChatWizard({ isOpen, onClose, initialFlow }: ChatWizardProps) {
           },
           locale,
           utm: utmParams,
+          event_id: eventId,
         }),
       });
 
       if (response.ok) {
         clearSession();
         setStep("success");
-        trackLeadGeneration({ lead_source: "chat_wizard", flow: data.flow as "buy" | "sell" | null });
+        trackLeadGeneration({ lead_source: "chat_wizard", flow: data.flow as "buy" | "sell" | null, eventId });
       } else {
         const responseData = await response.json();
         // Handle server-side validation errors

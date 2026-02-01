@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateLeadPayload, normalizePhone } from "@/lib/validation";
+import { sendConversionEvent, extractMetaCookies } from "@/lib/meta-capi";
 
 type CTASource =
   | "navbar"
@@ -30,6 +31,7 @@ interface LeadMagnetPayload {
   };
   locale: string;
   utm?: UTMParams;
+  event_id?: string;
 }
 
 interface ChatWizardPayload {
@@ -52,6 +54,7 @@ interface ChatWizardPayload {
   };
   locale: string;
   utm?: UTMParams;
+  event_id?: string;
 }
 
 interface ConsultLeadPayload {
@@ -77,6 +80,7 @@ interface ConsultLeadPayload {
   };
   locale: string;
   utm?: UTMParams;
+  event_id?: string;
 }
 
 type LeadPayload = LeadMagnetPayload | ChatWizardPayload | ConsultLeadPayload;
@@ -108,6 +112,76 @@ interface N8nErrorResponse {
 }
 
 type N8nResponse = N8nSuccessResponse | N8nErrorResponse;
+
+// Helper to send Meta CAPI event (non-blocking)
+async function sendMetaConversion(
+  body: LeadPayload,
+  request: Request
+): Promise<void> {
+  // Skip if no event_id (client-side tracking not done)
+  if (!body.event_id) return;
+
+  // Extract user data based on lead type
+  const userData: {
+    email?: string;
+    phone?: string;
+    name?: string;
+    firstName?: string;
+    fbc?: string;
+    fbp?: string;
+    clientIpAddress?: string;
+    clientUserAgent?: string;
+  } = {
+    clientUserAgent: request.headers.get("user-agent") || undefined,
+    clientIpAddress:
+      request.headers.get("x-forwarded-for")?.split(",")[0] ||
+      request.headers.get("x-real-ip") ||
+      undefined,
+  };
+
+  // Extract Meta cookies from request
+  const cookieHeader = request.headers.get("cookie");
+  if (cookieHeader) {
+    const metaCookies = extractMetaCookies(cookieHeader);
+    userData.fbc = metaCookies.fbc;
+    userData.fbp = metaCookies.fbp;
+  }
+
+  // Extract contact info based on lead type
+  if (body.type === "lead_magnet") {
+    userData.email = body.contact.email;
+    userData.firstName = body.contact.firstName;
+  } else if (body.type === "chat_wizard" || body.type === "consult") {
+    userData.email = body.contact.email;
+    userData.phone = body.contact.phone;
+    userData.name = body.contact.name;
+  }
+
+  // Determine event type
+  const eventName = body.type === "consult" ? "Contact" : "Lead";
+  const eventValue = body.type === "consult" ? 5 : 1;
+
+  // Build event source URL
+  const referer = request.headers.get("referer");
+  const eventSourceUrl = referer || "https://sullyruiz.com";
+
+  try {
+    await sendConversionEvent({
+      eventName,
+      eventId: body.event_id,
+      eventSourceUrl,
+      userData,
+      customData: {
+        value: eventValue,
+        currency: "USD",
+        content_name: body.type,
+      },
+    });
+  } catch (error) {
+    // Log but don't fail the request
+    console.error("Meta CAPI error:", error);
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -173,6 +247,9 @@ export async function POST(request: Request) {
         // For consult type, parse and forward the n8n response
         if (body.type === "consult") {
           if (webhookResponse.ok) {
+            // Send Meta CAPI event on success (non-blocking)
+            sendMetaConversion(body, request);
+
             try {
               const n8nData: N8nResponse = await webhookResponse.json();
               return NextResponse.json(n8nData, { status: 200 });
@@ -209,6 +286,9 @@ export async function POST(request: Request) {
             webhookResponse.status,
             await webhookResponse.text()
           );
+        } else {
+          // Send Meta CAPI event on success for non-consult types
+          sendMetaConversion(body, request);
         }
       } catch (webhookError) {
         clearTimeout(timeoutId);
@@ -245,6 +325,8 @@ export async function POST(request: Request) {
       }
     } else {
       console.log("N8N_WEBHOOK_URL not configured - lead stored locally only");
+      // Still send Meta CAPI even without n8n
+      sendMetaConversion(body, request);
     }
 
     return NextResponse.json({

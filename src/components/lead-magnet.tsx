@@ -11,6 +11,7 @@ import { getSessionId, setCTASource, clearSession } from "@/lib/session";
 import { validateEmail, validateName } from "@/lib/validation";
 import { useToast } from "@/components/toast-provider";
 import { trackGuideToggle, trackLeadGeneration, trackFormError } from "@/lib/analytics";
+import { generateEventId } from "@/lib/meta-pixel";
 import { getUTMParams } from "@/lib/utm";
 
 export function LeadMagnet() {
@@ -116,6 +117,9 @@ export function LeadMagnet() {
     setIsSubmitting(true);
     setHasError(false);
 
+    // Generate event ID for Meta deduplication
+    const eventId = generateEventId();
+
     try {
       // Set CTA source for lead magnet
       setCTASource("lead_magnet");
@@ -133,6 +137,7 @@ export function LeadMagnet() {
           contact: { firstName, email },
           locale,
           utm: utmParams,
+          event_id: eventId,
         }),
       });
 
@@ -142,7 +147,7 @@ export function LeadMagnet() {
         setFirstName("");
         setEmail("");
         setErrors({});
-        trackLeadGeneration({ lead_source: "lead_magnet", guide_type: guideType });
+        trackLeadGeneration({ lead_source: "lead_magnet", guide_type: guideType, eventId });
         toast({
           title: t("success"),
           variant: "success",

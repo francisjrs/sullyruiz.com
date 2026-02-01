@@ -19,6 +19,8 @@ import { getSessionId, setCTASource, clearSession } from "@/lib/session";
 import { validateEmail, validateName, validatePhoneRequired } from "@/lib/validation";
 import { useToast } from "@/components/toast-provider";
 import { getUTMParams } from "@/lib/utm";
+import { trackConsultSubmission } from "@/lib/analytics";
+import { generateEventId } from "@/lib/meta-pixel";
 
 interface FormData {
   name: string;
@@ -185,6 +187,9 @@ export function ConsultForm() {
 
     setIsSubmitting(true);
 
+    // Generate event ID for Meta deduplication
+    const eventId = generateEventId();
+
     try {
       setCTASource("consult_form");
       const sessionId = getSessionId();
@@ -213,6 +218,7 @@ export function ConsultForm() {
         },
         locale,
         utm: utmParams,
+        event_id: eventId,
       };
 
       const response = await fetch("/api/lead", {
@@ -227,6 +233,8 @@ export function ConsultForm() {
         clearSession();
         setSuccessResponse(data as N8nSuccessResponse);
         setIsSuccess(true);
+        // Track consult submission with Meta Contact event
+        trackConsultSubmission({ eventId });
         toast({
           title: tSuccess("title"),
           description: tSuccess("message"),
