@@ -260,6 +260,7 @@ export const BuyersGuide: React.FC<BuyersGuideProps> = ({
             {/* Contact info */}
             <View style={styles.contactRight}>
               {photoPath && (
+                // eslint-disable-next-line jsx-a11y/alt-text
                 <Image
                   src={photoPath}
                   style={styles.contactPhoto}

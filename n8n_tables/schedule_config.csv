@@ -1,0 +1,5 @@
+slot_id,post_time,post_type,days_active,is_active,last_posted_date
+1,08:00,mito_realidad,"1,2,3,4,5",true,
+2,12:00,paso_a_paso,"1,2,3,4,5",true,
+3,16:00,tip_rapido,"1,2,3,4,5",true,
+4,20:00,historia_real,"1,2,3,4,5",true,

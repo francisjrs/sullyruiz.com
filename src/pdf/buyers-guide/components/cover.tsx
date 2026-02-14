@@ -42,6 +42,7 @@ export const Cover: React.FC<CoverProps> = ({
           borderWidth: 2,
           borderColor: colors.gold,
         }}>
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <Image
             src={photoPath}
             style={{

@@ -30,7 +30,7 @@ interface QuoteBoxProps {
 
 export const QuoteBox: React.FC<QuoteBoxProps> = ({ children, author }) => (
   <View style={styles.quoteBox}>
-    <Text style={styles.quoteText}>"{children}"</Text>
+    <Text style={styles.quoteText}>{"\u201C"}{children}{"\u201D"}</Text>
     {author && (
       <Text style={[styles.quoteText, { marginTop: 10, fontSize: 11 }]}>
         — {author}

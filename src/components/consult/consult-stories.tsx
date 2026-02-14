@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Star, Heart, Share2, ThumbsUp } from "lucide-react";
+import { Star, Share2, ThumbsUp } from "lucide-react";
 
 export function ConsultStories() {
   const t = useTranslations("consult.stories");

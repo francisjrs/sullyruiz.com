@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 
 // Removed canvas dependency. Using pure string replacement for SVGs.
