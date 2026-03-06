@@ -1,49 +1,5 @@
 {
   "version": 1,
-  "lastUpdated": "2026-03-06T02:34:56.304Z",
-  "posts": [
-    {
-      "title": "Test Post from OpenClaw — Georgetown Area Guide",
-      "description": "This is a test post to verify the OpenClaw to sullyruiz.com publish pipeline is working correctly end-to-end.",
-      "category": "area-guide",
-      "tags": [
-        "georgetown",
-        "area-guide",
-        "central-texas",
-        "williamson-county"
-      ],
-      "cities": [
-        "Georgetown"
-      ],
-      "author": "Sully Ruiz",
-      "publishedAt": "2026-03-06T02:33:29.373Z",
-      "slug": "test-post-openclaw",
-      "locales": [
-        "en"
-      ],
-      "readingTime": 1
-    },
-    {
-      "title": "Living in Austin, TX: What You Need to Know in 2026",
-      "description": "Thinking about moving to Austin in 2026? Get current home prices, top neighborhoods, schools, cost of living, and tips from a local REALTOR.",
-      "category": "area-guide",
-      "tags": [
-        "austin",
-        "central-texas",
-        "area-guide",
-        "relocation",
-        "first-time-buyer"
-      ],
-      "cities": [
-        "austin"
-      ],
-      "author": "Sully Ruiz",
-      "publishedAt": "2026-03-06T02:34:56.279Z",
-      "slug": "living-in-austin-tx-2026",
-      "locales": [
-        "en"
-      ],
-      "readingTime": 14
-    }
-  ]
+  "lastUpdated": "",
+  "posts": []
 }
