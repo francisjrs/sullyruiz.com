@@ -7,6 +7,8 @@ import { BlogPostCard } from "@/components/blog/blog-post-card";
 import type { BlogCategory } from "@/lib/blog-types";
 import { siteConfig, getCanonicalUrl, getOgLocale } from "@/lib/seo-config";
 
+export const dynamic = 'force-dynamic';
+
 const VALID_CATEGORIES: BlogCategory[] = [
   "area-guide",
   "market-report",

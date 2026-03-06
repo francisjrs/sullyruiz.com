@@ -4,7 +4,7 @@ import { getAllPosts, getAllCategories } from "@/lib/blog";
 import { BlogPostCard } from "@/components/blog/blog-post-card";
 import Link from "next/link";
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export default async function BlogIndexPage({
   params,

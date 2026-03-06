@@ -5,10 +5,7 @@ import { getPostsByTag, getAllTags } from "@/lib/blog";
 import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { siteConfig, getCanonicalUrl, getOgLocale } from "@/lib/seo-config";
 
-export async function generateStaticParams() {
-  const tags = await getAllTags();
-  return tags.map((tag) => ({ tag }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params,

@@ -17,7 +17,7 @@ import {
   getOgLocale,
 } from "@/lib/seo-config";
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params,
