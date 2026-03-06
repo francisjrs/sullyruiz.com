@@ -46,6 +46,8 @@ services:
       - traefik.http.middlewares.sullyruiz-headers.headers.forceSTSHeader=true
       - traefik.http.middlewares.sullyruiz-headers.headers.STSIncludeSubdomains=true
       - traefik.http.middlewares.sullyruiz-headers.headers.STSPreload=true
+    volumes:
+      - blog_content:/app/content/blog
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/api/health"]
       interval: 30s
@@ -55,3 +57,4 @@ services:
 
 volumes:
   traefik_data:
+  blog_content:

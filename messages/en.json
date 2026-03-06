@@ -526,6 +526,46 @@
       "copyright": "© {year} Sully Ruiz Real Estate. All rights reserved."
     }
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Real estate guides, market reports, and tips for buyers and sellers in Central Texas.",
+    "readMore": "Read more",
+    "minutesRead": "min read",
+    "noPosts": "No posts yet. Check back soon!",
+    "post": "post",
+    "posts": "posts",
+    "updated": "Updated",
+    "relatedPosts": "Related Posts",
+    "authorBio": "Bilingual real estate agent specializing in Central Texas. Helping families find their dream homes with personalized attention.",
+    "categories": {
+      "area-guide": "Area Guide",
+      "market-report": "Market Report",
+      "buyer-guide": "Buyer Guide",
+      "seller-guide": "Seller Guide",
+      "financing": "Financing",
+      "lifestyle": "Lifestyle",
+      "investment": "Investment"
+    },
+    "cta": {
+      "buyer": "Ready to find your home?",
+      "buyerSub": "Get a free consultation to explore your options in Central Texas.",
+      "seller": "Thinking about selling?",
+      "sellerSub": "Get a free home valuation and learn how to maximize your sale price.",
+      "button": "Get Started Free",
+      "tour": "Get a Tour",
+      "valuation": "Get Your Home's Value",
+      "valuationSub": "Find out what your home is worth in today's market."
+    },
+    "areaGuide": "Area Guide",
+    "quickFacts": "Quick Facts",
+    "area": "Area",
+    "topics": "Topics",
+    "footer": {
+      "tagline": "Your guide to Central Texas real estate.",
+      "contact": "Contact",
+      "cta": "Free Consultation"
+    }
+  },
   "screening": {
     "header": {
       "subtitle": "Pre-Qualification Questionnaire"

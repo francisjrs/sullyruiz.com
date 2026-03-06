@@ -18,5 +18,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|es)/:path*', '/screening', '/privacy', '/terms', '/data-deletion', '/consult', '/consulta']
+  matcher: ['/', '/(en|es)/:path*', '/screening', '/privacy', '/terms', '/data-deletion', '/consult', '/consulta', '/blog', '/blog/:path*']
 };

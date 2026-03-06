@@ -1,0 +1,161 @@
+/* Blog theme — inherits luxury brand: cream, gold, black */
+.blog-theme {
+  --blog-bg: var(--background, #f4f1ec);
+  --blog-text: var(--foreground, #000000);
+  --blog-text-muted: var(--muted-foreground, #666666);
+  --blog-accent: var(--accent, #BEB09E);
+  --blog-accent-light: #f4f1ec;
+  --blog-border: var(--border, #BEB09E);
+  --blog-card-bg: #ffffff;
+
+  background-color: var(--blog-bg);
+  color: var(--blog-text);
+}
+
+/* Prose styling for blog post content */
+.blog-prose {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--blog-text);
+}
+
+.blog-prose h1 {
+  font-size: 2.25rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-prose h2 {
+  font-size: 1.75rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--blog-border);
+}
+
+.blog-prose h3 {
+  font-size: 1.375rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose a {
+  color: var(--blog-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blog-prose a:hover {
+  color: #a89a87;
+}
+
+.blog-prose strong {
+  font-weight: 700;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.blog-prose ul {
+  list-style-type: disc;
+}
+
+.blog-prose ol {
+  list-style-type: decimal;
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-prose blockquote {
+  border-left: 4px solid var(--blog-accent);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--blog-text-muted);
+}
+
+.blog-prose img {
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.blog-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.blog-prose th,
+.blog-prose td {
+  border: 1px solid var(--blog-border);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.blog-prose th {
+  background-color: var(--blog-card-bg);
+  font-weight: 600;
+}
+
+.blog-prose code {
+  background-color: var(--blog-card-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.blog-prose pre {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.blog-prose pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+.blog-prose hr {
+  border: none;
+  border-top: 1px solid var(--blog-border);
+  margin: 2rem 0;
+}
+
+/* Category badge */
+.blog-category-badge {
+  display: inline-block;
+  background-color: var(--blog-accent-light);
+  color: var(--blog-text);
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--blog-border);
+}
+
+/* Blog card hover */
+.blog-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.blog-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}

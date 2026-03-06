@@ -526,6 +526,46 @@
       "copyright": "© {year} Sully Ruiz Bienes Raíces. Todos los derechos reservados."
     }
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Guias de bienes raices, reportes de mercado y consejos para compradores y vendedores en Texas Central.",
+    "readMore": "Leer mas",
+    "minutesRead": "min de lectura",
+    "noPosts": "Aun no hay publicaciones. Vuelve pronto!",
+    "post": "publicacion",
+    "posts": "publicaciones",
+    "updated": "Actualizado",
+    "relatedPosts": "Posts Relacionados",
+    "authorBio": "Agente de bienes raices bilingue especializada en Texas Central. Ayudando a familias a encontrar la casa de sus suenos con atencion personalizada.",
+    "categories": {
+      "area-guide": "Guia de Area",
+      "market-report": "Reporte de Mercado",
+      "buyer-guide": "Guia del Comprador",
+      "seller-guide": "Guia del Vendedor",
+      "financing": "Financiamiento",
+      "lifestyle": "Estilo de Vida",
+      "investment": "Inversion"
+    },
+    "cta": {
+      "buyer": "Listo para encontrar tu hogar?",
+      "buyerSub": "Obtén una consulta gratis para explorar tus opciones en Texas Central.",
+      "seller": "Pensando en vender?",
+      "sellerSub": "Obtén una valuacion gratis y aprende como maximizar tu precio de venta.",
+      "button": "Comienza Gratis",
+      "tour": "Agenda un Tour",
+      "valuation": "Obtén el Valor de tu Casa",
+      "valuationSub": "Descubre cuanto vale tu casa en el mercado actual."
+    },
+    "areaGuide": "Guia de Area",
+    "quickFacts": "Datos Rapidos",
+    "area": "Area",
+    "topics": "Temas",
+    "footer": {
+      "tagline": "Tu guia de bienes raices en Texas Central.",
+      "contact": "Contacto",
+      "cta": "Consulta Gratis"
+    }
+  },
   "screening": {
     "header": {
       "subtitle": "Cuestionario de Pre-Calificación"

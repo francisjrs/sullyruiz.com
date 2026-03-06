@@ -12,7 +12,7 @@ export function LanguageToggle() {
 
   const toggleLocale = () => {
     const newLocale = locale === "en" ? "es" : "en";
-    router.replace(pathname, { locale: newLocale });
+    router.replace(pathname as "/", { locale: newLocale });
   };
 
   return (

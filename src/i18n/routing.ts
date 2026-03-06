@@ -14,7 +14,11 @@ export const routing = defineRouting({
     '/consult': {
       en: '/consult',
       es: '/consulta'
-    }
+    },
+    '/blog': '/blog',
+    '/blog/[slug]': '/blog/[slug]',
+    '/blog/category/[category]': '/blog/category/[category]',
+    '/blog/tag/[tag]': '/blog/tag/[tag]'
   }
 });
 
