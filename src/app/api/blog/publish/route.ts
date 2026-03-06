@@ -68,6 +68,22 @@ export async function POST(request: Request) {
     revalidatePath(`/es/blog/${payload.slug}`);
     revalidatePath("/sitemap.xml");
 
+    // Ping IndexNow for instant Bing indexing
+    const indexNowUrls = [
+      `https://sullyruiz.com/blog/${payload.slug}`,
+      `https://sullyruiz.com/es/blog/${payload.slug}`,
+    ];
+    fetch("https://api.indexnow.org/IndexNow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        host: "sullyruiz.com",
+        key: "043b82177ed14649a3692bcf6b883133",
+        keyLocation: "https://sullyruiz.com/043b82177ed14649a3692bcf6b883133.txt",
+        urlList: indexNowUrls,
+      }),
+    }).catch((err) => console.error("IndexNow ping failed:", err));
+
     return NextResponse.json(
       {
         success: true,
