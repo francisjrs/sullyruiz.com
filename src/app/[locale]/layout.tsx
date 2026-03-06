@@ -129,13 +129,7 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://connect.facebook.net" />
-        {/* Preload hero image for LCP optimization */}
-        <link
-          rel="preload"
-          href="/images/hero.webp"
-          as="image"
-          type="image/webp"
-        />
+        {/* Hero image preload is handled in the homepage component */}
       </head>
       <body
         className={`${montserrat.variable} ${cormorant.variable} antialiased`}
