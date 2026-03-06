@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# blog runtime data (managed by publish API, not git)
+/content/blog/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
