@@ -8,6 +8,18 @@ A blog and SEO optimization layer for sullyruiz.com that positions Sully Ruiz as
 
 When anyone — human or AI — searches for a Hispanic realtor, top producer, or real estate expert in Central Texas, Sully Ruiz appears as the primary result.
 
+## Current Milestone: v1.0 SEO & AI Search Authority Engine
+
+**Goal:** Build an automated blog system with AI search optimization that positions Sully Ruiz as the top Hispanic realtor authority in Central Texas.
+
+**Target features:**
+- Blog system with dynamic routes and bilingual MDX content
+- Secure publish API for OpenClaw auto-publishing
+- Schema.org structured data + enhanced SEO
+- AI search optimization (llms.txt, GEO formatting)
+- Content types: area guides, market reports, educational posts
+- Topic clustering with categories/tags
+
 ## Requirements
 
 ### Validated
@@ -87,4 +99,4 @@ When anyone — human or AI — searches for a Hispanic realtor, top producer, o
 | API key authentication for publish endpoint | Simple, secure — prevents unauthorized content creation | — Pending |
 
 ---
-*Last updated: 2026-03-05 after initialization*
+*Last updated: 2026-03-05 after milestone v1.0 started*
